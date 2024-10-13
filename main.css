@@ -1,0 +1,255 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.5; 
+    list-style: none; 
+    text-decoration: none;
+    font-family: "Quicksand", sans-serif;
+}
+
+body, html {
+    height: 100%;
+}
+
+h1 {
+    text-align: center;
+    padding-top: 1em;
+    font-size: 5em;
+}
+
+:root {
+    --deep-pink: #E531BD;
+    --blue: rgb(44, 166, 247);
+    --light-pink: rgb(246, 51, 148);
+    --almost-black: rgb(3, 2, 21);
+    --light-blue: rgb(23, 209, 236); 
+    --deep-orange: rgb(255, 190, 22);
+    
+}
+
+/* navbar */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 0.05fr 0.25fr 1fr 0.5fr 0.25fr 0.05fr;
+    grid-template-rows: auto;
+    grid-template-areas: ". logo list auth social .";
+    background-color: var(--light-blue);
+    position: sticky;
+    height: auto;
+}
+
+#logo{
+    grid-area: logo;
+}
+
+.logo_image {
+    display: block;
+    width: 8em;
+    max-height: 100%;
+}
+
+#primary{
+    grid-area: list;
+    display: grid;
+}
+
+nav#primary ul {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+nav#primary li {
+    display: block;
+    margin-left: 3em;
+}
+
+nav#primary li a {
+    text-decoration: none;
+    font-size: 2em;
+    transition: color .2s;
+    color: var(--deep-orange);
+}
+
+nav#primary li a:hover {
+    color: var(--deep-pink);
+}
+
+.social {
+    grid-area: social;
+    display: inline-flex;
+    align-items: center;
+    justify-self: center;
+}
+
+.facebook img, .instagram img{
+    height: 3em;
+    width: 3em;
+}
+
+.facebook img {
+    margin-right: 1em;
+}
+
+.auth{
+    grid-area: auth;
+    display: inline-flex;
+    align-items: center;
+    justify-self: center;
+}
+
+.auth a{
+    text-decoration: none;
+}
+
+.auth button{
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    border-radius: 15px;
+    padding: 0.5rem 1rem;
+    margin: 1em;
+    width: 10em;
+}
+
+.cta {
+    background: url('/Images/cta.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 35em;
+    width: auto;
+}
+
+/* .cta div {
+    position: relative;
+} */
+
+.cta h2 {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    text-align: center;
+    left: 50%;
+    color: var(--light-pink);
+    font-size: 5em;
+}
+
+h1 {
+    color: var(--almost-black);
+}
+
+/* login page */
+.login_main_body {
+    background: linear-gradient(217deg, var(--light-pink), var(--blue), var(--deep-orange));
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+/* cards */
+.book_card, .login_card, .forgot_card {
+    background-color: var(--light-blue);
+    box-shadow: 1px 5px 4px var(--almost-black);
+    border-radius: 2.5em;
+    padding: 0.5em;
+    margin: 3em;
+}
+
+.book_card h3 {
+    text-align: center;
+    padding: 1em;
+    font-size: 2em;
+}
+
+.login_card {
+    width: 30%;
+}
+
+.forgot_card {
+    width: 40%;
+}
+
+.login_card, .forgot_card {
+    color: var(--almost-black);
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login_card h3, .forgot_card h3 {
+    text-align: center;
+    padding-top: 1em;
+    font-size: 3em;
+}
+
+.login_card form, .forgot_card form {
+    text-align: center;
+    padding: .5em;
+}
+
+.username_label, .password_label, .email_label {
+    display: block;
+    padding-top: 1em;
+    font-size: 1.5em;
+}
+
+#username, #password, #email{
+    border-radius: .5em;
+    width: 70%;
+    padding: .35em;
+    margin: .25em;
+}
+
+.no_account, .forgot{
+    font-size: .75em;
+}
+
+.no_account {
+    padding-right: 3em;
+}
+
+#submit {
+    width: 40%;
+}
+
+#reset {
+    width: 50%;
+}
+
+#submit, #reset {
+    margin-top: 1em;
+    font-size: 2em;
+    border-radius: .35em;
+    background-color: var(--deep-orange);
+}
+
+#home_link {
+    display: block;
+    font-size: 1em;
+    text-decoration: underline;
+    margin: 1em;
+}
+
+/* footer */
+footer {
+    background-color: var(--almost-black);
+    opacity: 0.5;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+footer p{
+    padding: .5em;
+    color: white;
+    text-align: right;
+
+}
