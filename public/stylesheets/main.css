@@ -1,0 +1,263 @@
+
+
+.cta {
+    background: url('/Images/cta.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 35em;
+    width: auto;
+}
+
+.cta h2 {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    top: 30%;
+    text-align: center;
+    left: 30%;
+    /* border: 5px solid red; */
+    color: var(--light-pink);
+    font-size: 5em;
+}
+
+/* search function */
+.search_area {
+    display: grid;
+    /* align-items: center; */
+    justify-content: right;
+    margin: 1em;
+}
+
+.search_form {
+    display: inline-flex;
+    align-items: center;
+    justify-self: center;
+    border-radius: 1em;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    overflow: hidden;
+    padding: .75em;
+    width: 100%;
+}
+
+.search_form #search {
+    border: 1px solid var(--almost-black);
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    border-radius: 3px;
+    color: var(--blue);
+    float: left;
+    font: 3em;
+    height: 2em;
+    padding: .5em;
+    width: 25em;
+    margin-right: 1em;
+}
+
+.search_form #search:focus {
+    border-color: #aaa;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    outline: 0;
+}
+
+.search_form #go {
+    background-color: var(--light-pink);
+    border-radius: .75em;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    color: var(--deep-orange);
+    cursor: pointer;
+    height: 2em;
+    float: right;
+    font: 3em;
+    text-align: center;
+    font-weight: 900;
+    width: 5em;
+}
+
+.search_form #go:hover,
+.search_form #go:focus {
+  background-color: var(--light-blue);
+}
+
+.search_form #go:active {
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    outline: 0;
+}
+
+
+h1 {
+    color: var(--almost-black);
+}
+
+/* login page */
+.login_main_body {
+    background: linear-gradient(217deg, var(--light-pink), var(--blue), var(--deep-orange));
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+/* cards */
+.book_card, .login_card, .forgot_card {
+    background-color: var(--light-blue);
+    box-shadow: 1px 5px 4px var(--almost-black);
+    border-radius: 2.5em;
+    padding: 0.5em;
+    margin: 3em;
+}
+
+.login_card {
+    width: 30%;
+}
+
+.forgot_card {
+    width: 40%;
+}
+
+.login_card, .forgot_card {
+    color: var(--almost-black);
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.auth_heading {
+    text-align: center;
+    padding-top: 1em;
+    font-size: 3em;
+}
+
+.login_card form, .forgot_card form {
+    text-align: center;
+    padding: .5em;
+}
+
+.username_label, .password_label, .email_label {
+    display: block;
+    padding-top: 1em;
+    font-size: 1.5em;
+}
+
+#username, #password, #email{
+    border-radius: .5em;
+    width: 70%;
+    padding: .35em;
+    margin: .25em;
+}
+
+.no_account, .forgot{
+    font-size: .75em;
+}
+
+.no_account {
+    padding-right: 3em;
+}
+
+#submit {
+    width: 40%;
+}
+
+#reset {
+    width: 50%;
+}
+
+#submit, #reset {
+    margin-top: 1em;
+    font-size: 2em;
+    border-radius: .35em;
+    background-color: var(--deep-orange);
+}
+
+#home_link {
+    display: block;
+    font-size: 1em;
+    text-decoration: underline;
+    margin: 1em;
+}
+
+/* book card */
+.book_card {
+    display: inline-block;
+    width: 25%;
+}
+
+.title {
+    font-size: 1.5em;
+    text-align: center;
+    margin-top: 1em;
+}
+
+.author, .category {
+    text-align: center;
+    padding: .25em;
+}
+
+.book_card img {
+    display: grid;
+    margin: auto;
+    height: 20em;
+    padding: 2em 0;
+}
+
+.description {
+    text-align: justify;
+    padding: 1em;
+}
+
+.book_card button {
+    display: grid;
+    margin: auto;
+    padding: .5em;
+    background-color: var(--deep-orange);
+    border-radius: .5em;
+    height: 3em;
+    width: 10em;
+}
+
+/* Rating feature */
+.rating {
+    text-align: center;
+}
+
+.rate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3em;
+    flex-direction: row-reverse;
+}
+
+.rate input {
+    display: none;
+}
+
+.rate label {
+    float: left;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 2em;
+    color:#fff;
+    transition: color 0.2s ease-in-out;
+}
+
+.rate label:before {
+    content: '★';
+}
+
+.rate input:checked {
+    color: var(--deep-pink);    
+}
+
+.rate, label:hover,
+.rate > label:hover ~ label {
+    color: var(--deep-pink);  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: var(--deep-pink);
+} 
+
