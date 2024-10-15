@@ -1,8 +1,31 @@
 import express from 'express';
-import expressLayouts from 'express-ejs-layouts'
+import expressLayouts from 'express-ejs-layouts';
 import path from 'path';
+import mongoose from 'mongoose';
+import 'dotenv/config';
 import { fileURLToPath } from 'url';
 // import ejsMate from 'ejs-mate';
+
+//Import the different routes
+import booksRouter from './routes/books.js';
+import userRouter from './routes/user.js';
+import reviewsRouter from './routes/reviews.js';
+
+// Load environment variables only in development mode
+if (process.env.NODE_ENV !== 'production') {
+    console.log('Development mode: Loading environment variables');
+}
+
+// Connecting to MongoDB
+const DATABASE_URL = process.env.DATABASE_URL;
+mongoose.connect(DATABASE_URL)
+.then(() => console.log('Connected to MongoDB'))
+.catch(error => console.error('Error connecting to MongoDB:', error));
+
+// Listen for MongoDB connection events (optional)
+const db = mongoose.connection;
+db.on('error', error => console.error('MongoDB connection error:', error));
+db.once('open', () => console.log('MongoDB connection is open'));
 
 const app = express();
 
@@ -10,7 +33,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Serving on port ${PORT}`)
-      // npm run start
+      // npm run start - to run/start the application
 });
 
 //View engine setup
@@ -21,32 +44,21 @@ app.set('view engine', 'ejs');
 
 // Middleware
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: false})); // Use forms - Auth
 
-//Additional file directories
-// Be able to use __dirname with ES module
+//Additional file directories and be able to use __dirname with ES module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Call the home page
+
+// Render the home page
 app.get('/', (req, res) => {
-    res.render('home', {title: "Media Review App"})
+  res.render('index', {title: "Media Review App"});
 });
 
-app.get('/login', (req, res) => {
-    res.render('login', {title: "Media Review App", layout: './layouts/auth'})
-});
-
-app.get('/signup', (req, res) => {
-    res.render('signup', {title: "Media Review App", layout: './layouts/auth'})
-});
-
-app.get('/forgot_password', (req, res) => {
-    res.render('forgot_password', {title: "Media Review App", layout: './layouts/auth'})
-});
-
-app.get('/review', (req, res) => {
-    res.render('review', {title: "Media Review App"})
-});
+// Link all the routes to the different pages
+app.use('/books', booksRouter);
+app.use('/user', userRouter);
+app.use('/reviews', reviewsRouter)

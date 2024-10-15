@@ -2,14 +2,18 @@
 <section class="login_main_body">
     <div class="login_card">
         <h3 class="auth_heading">Login</h3>
-        <form action="">
+        <form action="/user/login" method="POST">
             <label class="username_label" for="username">Username</label>
             <input type="text" id="username" name="username" required><br>
+
             <label class="password_label" for="password">Password</label>
-            <input type="text" id="password" name="password"><br>
-            <a href="/register"class="no_account">Don't have an account?</a>
-            <a href="/forgot_password" class="forgot">Forgot Password?</a>
-            <input type="submit" value="Submit" id="submit" required><br>
+            <input type="password" id="password" name="password" required><br>
+
+            <a href="/user/signup"class="no_account">Don't have an account?</a>
+            <a href="/user/forgot_password" class="forgot">Forgot Password?</a>
+
+            <input type="submit" value="Login" id="submit"><br>
+
             <a href="/" id="home_link">Home</a>
         </form>
     </div>
