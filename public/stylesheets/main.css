@@ -1,5 +1,3 @@
-
-
 .cta {
     background: url('/Images/cta.jpg');
     background-size: cover;
@@ -21,12 +19,27 @@
     font-size: 5em;
 }
 
+h1, .advanced_search_main_heading {
+    color: var(--almost-black);
+}
+
 /* search function */
-.search_area {
+.main_search_area, .advanced_search_area {
     display: grid;
-    /* align-items: center; */
-    justify-content: right;
     margin: 1em;
+}
+
+.main_search_area {
+    justify-content: right;
+}
+
+.advanced_search_area {
+    justify-content: center;
+}
+
+.advanced_search_heading {
+    text-align: center;
+    margin: 2em;
 }
 
 .search_form {
@@ -83,9 +96,8 @@
     outline: 0;
 }
 
-
-h1 {
-    color: var(--almost-black);
+.advanced_search_text {
+    margin: 1em;
 }
 
 /* login page */

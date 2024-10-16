@@ -36,8 +36,8 @@ router.get('/', async (req, res) => {
         res.render('books/indexBooks', {
             title: "Media Review App", 
             books: books, 
-            searchOptions: req.query})
-    }   catch {
+            searchOptions: req.query
+    })} catch {
         res.redirect('/')
     }
 });
@@ -69,37 +69,45 @@ router.post('/', upload.single('cover'), async (req, res) => {
         };
     });
 
-    router.get('/advancedSearch', async (req, res) => {
-        let searchOptions = {}
-    
-        // Check if title is provided
-        if (req.query.title != null && req.query.title !== '') {
-            searchOptions.title = new RegExp(req.query.title, 'i');
+router.get('/advancedSearch', async (req, res) => {
+    let searchOptions = {}
+
+    // Check if title, author, or category is provided
+    const hasSearchParams = req.query.title || req.query.author || req.query.category;
+
+    // Only add to searchOptions if there are search parameters
+    if (req.query.title) {
+        searchOptions.title = new RegExp(req.query.title, 'i');
+    }
+
+    if (req.query.author) {
+        searchOptions.author = new RegExp(req.query.author, 'i');
+    }
+
+    if (req.query.category) {
+        searchOptions.category = new RegExp(req.query.category, 'i');
+    }
+
+    try {
+        let books = [];
+
+        // Only search if there are search parameters
+        if (hasSearchParams) {
+            books = await Book.find(searchOptions);
         }
-    
-        // Check if author is provided
-        if (req.query.author != null && req.query.author !== '') {
-            searchOptions.author = new RegExp(req.query.author, 'i');
-        }
-    
-        // Check if category is provided
-        if (req.query.category != null && req.query.category !== '') {
-            searchOptions.category = new RegExp(req.query.category, 'i');
-        }
-    
-        try {
-            // Find books that match the search criteria
-            const books = await Book.find(searchOptions);
-            res.render('books/advancedSearch', {
-                title: "Media Review App", 
-                books: books, 
-                searchOptions: req.query // Pass the query back to the view so it can retain the input fields
-            });
-        } catch (error) {
-            console.error(error);
-            res.redirect('/books');
-        }
-    });
+
+        res.render('books/advancedSearch', {
+            title: "Media Review App",
+            books: books,
+            searchOptions: req.query // Keep the input fields populated with the user's search
+        });
+    } catch (error) {
+        console.error(error);
+        res.redirect('/books');
+    }
+});
+
+
 
 // Displays categories for books
 router.get('/categories', (req, res) => {

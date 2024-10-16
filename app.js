@@ -60,16 +60,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Render the home page
 app.get('/', async (req, res) => {
+  // These are our search options in the search form - searching by title
+  let searchOptions = {}
+  if (req.query.title != null && req.query.title !== '') {
+      searchOptions.title = new RegExp(req.query.title, 'i') //The i feature returns the search query whether upper or lowercase
+  }
   let books;
   try {
     books = await Book.find().sort({ createAt: 'desc' }).limit(10).exec() // Shows the books in created decending order - limited to 10. 
-   }  catch {
+  }  catch {
       books = [];
    } 
-  res.render('index', {
+   books = await Book.find(searchOptions)
+   res.render('index', {
     title: "Media Review App",
-    books: books
-  });
+    books: books,
+    searchOptions: req.query
+  })
 });
 
 // Link all the routes to the different pages
