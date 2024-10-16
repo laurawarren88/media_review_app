@@ -1,0 +1,25 @@
+<h1>Advanced Search Options </h1>
+
+<h2>Search for a book</h2>  
+<div class="search_area">
+    <form action="/books/advancedSearch" method="get" class="search_form">
+      <input type="text" name="title" id="search" value="<%= searchOptions.title || '' %>" placeholder="Title">
+      <input type="text" name="author" id="search" value="<%= searchOptions.author || '' %>" placeholder="Author">
+      <input type="text" name="category" id="search" value="<%= searchOptions.category || '' %>" placeholder="Category">
+      <!-- <input type="text" name="averageRating" id="search" value="" placeholder="Rating" required> -->
+      <button type="search" value="go" id="go">Search</button>
+    </form>
+</div>
+
+<div>
+  <% books.forEach(book => { %>
+    <img height="100" width="150" value="<%= book.coverImagePath %>" alt="">
+    <div>
+      <%= book.title %> 
+      <%= book.author %>
+      <%= book.category %>
+      <%= book.cover %>
+      <%= book.description %>
+    </div>
+  <% }) %>
+  </div>

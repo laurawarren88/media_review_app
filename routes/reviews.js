@@ -3,12 +3,17 @@ const router = express.Router();
 
 // Linking the models for MongoDB collections
 import Review from '../models/reviewModel.js';
+import Book from '../models/bookModel.js';
+import Login from '../models/loginModel.js';
 
 // Displays all the reviews
 router.get('/', async (req, res) => {
     try {
         const reviews = await Review.find({})
-        res.render('reviews/indexReview', {title: "Media Review App", reviews: reviews})
+        res.render('reviews/indexReview', {
+            title: "Media Review App", 
+            reviews: reviews
+        })
     }   catch {
         res.redirect('/')
     }

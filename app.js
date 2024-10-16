@@ -12,6 +12,9 @@ import booksRouter from './routes/books.js';
 import userRouter from './routes/user.js';
 import reviewsRouter from './routes/reviews.js';
 
+// Import book model
+import Book from './models/bookModel.js';
+
 // Load environment variables only in development mode
 if (process.env.NODE_ENV !== 'production') {
     console.log('Development mode: Loading environment variables');
@@ -56,8 +59,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Render the home page
-app.get('/', (req, res) => {
-  res.render('index', {title: "Media Review App"});
+app.get('/', async (req, res) => {
+  let books;
+  try {
+    books = await Book.find().sort({ createAt: 'desc' }).limit(10).exec() // Shows the books in created decending order - limited to 10. 
+   }  catch {
+      books = [];
+   } 
+  res.render('index', {
+    title: "Media Review App",
+    books: books
+  });
 });
 
 // Link all the routes to the different pages

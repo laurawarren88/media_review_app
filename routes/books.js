@@ -1,12 +1,31 @@
 import express from 'express';
+import path from 'path';
+import multer from 'multer';
+import fs from 'fs';
+
+// Linking the books models for MongoDB collections and saving cover images to a file
+import Book, { coverImageBasePath } from '../models/bookModel.js';
+
 const router = express.Router();
 
-// Linking the models for MongoDB collections
-import Book from '../models/bookModel.js'
+const uploadPath = path.join('public', coverImageBasePath);
+const imageMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif']; //The images the upload function supports
+const upload = multer ({
+    dest: uploadPath,
+    fileFilter: (req, file, callback) => {
+        const isValid = imageMimeTypes.includes(file.mimetype);
+        callback(null, isValid);
+        if (!isValid) {
+            callback(new Error('Invalid file type. Only images are allowed.'));
+        }
+    }
+});
+
+// Linking the review models for MongoDB collections 
+import Review from '../models/reviewModel.js';
  
 // Render the home page with all books
 router.get('/', async (req, res) => {
-    
     // These are our search options in the search form - searching by title
     let searchOptions = {}
     if (req.query.title != null && req.query.title !== '') {
@@ -23,33 +42,89 @@ router.get('/', async (req, res) => {
     }
 });
 
-
 // **** At the moment anyone can add a book but need to chnage this to only admin ****
-// Displays the form to input a review
 router.get('/new', (req, res) => {
-    res.render('books/newBook', { title: "Media Review App", book: new Book() })
+    renderNewPage(res, new Book())
 });
 
-// Posts a single review
-router.post('/', async (req, res) => {
+router.post('/', upload.single('cover'), async (req, res) => {
+    console.log('File uploaded:', req.file);
+    const filename = req.file != null ? req.file.filename : null;
     const book = new Book({
-        title: req.body.title
+        title: req.body.title,
+        author: req.body.author,
+        category: req.body.category,
+        coverImageName: filename,
+        description: req.body.description
     });
-    try {
+    try{
         const newBook = await book.save();
-        // res.redirect(`reviews/${newReviewText.id}`)
+        // res.redirect(`books/${newBook.id}`)
         res.redirect('books');
-        } catch (err) {
-            res.render('books/newBook', {
-            book: book,
-            errorMessage: 'Error creating New Book'
-        });
-    }
-});
+    }   catch {
+        if (book.coverImageName != null) {
+            removeBookCover(book.coverImageName)
+        }
+            renderNewPage(res, book, true)
+        };
+    });
+
+    router.get('/advancedSearch', async (req, res) => {
+        let searchOptions = {}
+    
+        // Check if title is provided
+        if (req.query.title != null && req.query.title !== '') {
+            searchOptions.title = new RegExp(req.query.title, 'i');
+        }
+    
+        // Check if author is provided
+        if (req.query.author != null && req.query.author !== '') {
+            searchOptions.author = new RegExp(req.query.author, 'i');
+        }
+    
+        // Check if category is provided
+        if (req.query.category != null && req.query.category !== '') {
+            searchOptions.category = new RegExp(req.query.category, 'i');
+        }
+    
+        try {
+            // Find books that match the search criteria
+            const books = await Book.find(searchOptions);
+            res.render('books/advancedSearch', {
+                title: "Media Review App", 
+                books: books, 
+                searchOptions: req.query // Pass the query back to the view so it can retain the input fields
+            });
+        } catch (error) {
+            console.error(error);
+            res.redirect('/books');
+        }
+    });
 
 // Displays categories for books
 router.get('/categories', (req, res) => {
     res.render('books/categories', {title: "Media Review App"});
 });
+
+// Function to remove a book cover when an error occured creating a book
+function removeBookCover(fileName) {
+    fs.unlink(path.join(uploadPath, fileName), err => {
+        if (err) console.log(err)
+    })
+}
+
+//Function to link back to the new books page
+async function renderNewPage(res, book, hasError = false) {
+    try {
+        const params = {
+            title: "Media Review App",
+            book: book
+        }
+        if (hasError) params.errorMessage = 'Error Creating Book'
+        res.render('books/newBook', params ) 
+    } catch {
+        res.redirect('/books')
+    }
+};
 
 export default router;

@@ -5,13 +5,21 @@
 <h2>Search for a book</h2>  
 <div class="search_area">
     <form action="/books" method="get" class="search_form">
-      <input type="text" name="title" id="search" value="<%= searchOptions.title %>" placeholder="Search for a book" required>
+      <input type="text" name="title" id="search" value="<%= searchOptions.title %>" placeholder="Search for a book by title" required>
       <button type="search" value="go" id="go">Search</button>
     </form>
 </div>
-
+<a href="/books/advancedSearch" class="">Advanced Search Options</a>
 <br>
 
-<% books.forEach(book => { %>
-  <div><%= book.title %></div>
-<% }) %>
+<div>
+  <% books.forEach(book => { %>
+    <img height="100" width="150" src="<%= book.coverImagePath %>" alt="<%= book.title %>">
+    <div>
+      <%= book.title %> 
+      <%= book.author %>
+      <%= book.category %>
+      <%= book.description %>
+    </div>
+  <% }) %>
+  </div>
