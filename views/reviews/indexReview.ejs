@@ -1,0 +1,7 @@
+<h1>Reviews</h1>
+
+<a href="/reviews/new">Add a new review</a>
+
+<% reviews.forEach(review => { %>
+    <div><%= review.reviewText %></div>
+  <% }) %>

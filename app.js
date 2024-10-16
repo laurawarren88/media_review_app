@@ -3,6 +3,7 @@ import expressLayouts from 'express-ejs-layouts';
 import path from 'path';
 import mongoose from 'mongoose';
 import 'dotenv/config';
+import bodyParser from 'body-parser';
 import { fileURLToPath } from 'url';
 // import ejsMate from 'ejs-mate';
 
@@ -44,14 +45,15 @@ app.set('view engine', 'ejs');
 
 // Middleware
 app.use(express.json());
-app.use(express.urlencoded({extended: false})); // Use forms - Auth
+app.use(express.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false}));
+
 
 //Additional file directories and be able to use __dirname with ES module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 // Render the home page
 app.get('/', (req, res) => {
