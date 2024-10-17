@@ -1,18 +1,20 @@
-<h1 class="advanced_search_main_heading">Advanced Search Options </h1>
+<h1 class="main_heading">Advanced Search Options </h1>
 
-<div class="main_search_area advanced_search_area">
-  <h2 class="advanced_search_heading">Search for a book</h2>  
-    <form action="/books/advancedSearch" method="get" class="search_form">
-      <input type="text" name="title" id="search" value="<%= searchOptions.title || '' %>" placeholder="Title">
-      <p class="advanced_search_text">and/or</p>
-      <input type="text" name="author" id="search" value="<%= searchOptions.author || '' %>" placeholder="Author">
-      <p class="advanced_search_text">and/or</p>
-      <input type="text" name="category" id="search" value="<%= searchOptions.category || '' %>" placeholder="Category">
-      <!-- <input type="text" name="averageRating" id="search" value="" placeholder="Rating" required> -->
-      <button type="search" value="go" id="go">Search</button>
-    </form>
-</div>
-
+<section class="search_container">
+  <div class="advanced_search_area">
+      <h2 class="advanced_search_heading">Search for a book</h2>  
+      <form action="/books/advancedSearch" method="get" class="advanced_search_form">
+        <input type="text" name="title" id="search" value="<%= searchOptions.title || '' %>" placeholder="Title">
+        <p class="advanced_search_text">and/or</p>
+        <input type="text" name="author" id="search" value="<%= searchOptions.author || '' %>" placeholder="Author">
+        <p class="advanced_search_text">and/or</p>
+        <input type="text" name="category" id="search" value="<%= searchOptions.category || '' %>" placeholder="Category">
+        <!-- <input type="text" name="averageRating" id="search" value="" placeholder="Rating" required> -->
+        <button type="search" value="go" id="go">Search</button>
+        <a href="javascript:void(0);" id="back_button" class="back_button"><< Back</a>
+      </form>
+  </div>
+</section>
 
 <% if (books.length > 0) { %> <!-- Only display if there are books -->
   <div>
@@ -29,3 +31,4 @@
 <% } else if (Object.keys(searchOptions).length > 0) { %> <!-- No books found, but search was performed -->
   <p>No books found for the given search criteria.</p>
 <% } %>
+

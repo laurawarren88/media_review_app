@@ -75,7 +75,7 @@ app.get('/', async (req, res) => {
    res.render('index', {
     title: "Media Review App",
     books: books,
-    searchOptions: req.query
+    searchOptions: {}
   })
 });
 

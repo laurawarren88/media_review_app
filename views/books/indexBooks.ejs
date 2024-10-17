@@ -1,16 +1,21 @@
-<h1>All Books</h1>
+<h1 class="main_heading">All Books</h1>
 
 <a href="/books/new">Add a new Book</a>
 
-<h2>Search for a book</h2>  
-<div class="search_area">
-    <form action="/books" method="get" class="search_form">
-      <input type="text" name="title" id="search" value="<%= searchOptions.title %>" placeholder="Search for a book by title" required>
-      <button type="search" value="go" id="go">Search</button>
-      <a href="/books/advancedSearch" class="">Advanced Search Options</a>
+<section class="search_container">
+  <div class="search_area">
+    <h2 class="main_search_heading">Search for a book</h2>  
+    <form  action="/" method="get"  class="search_form">
+      <div class="input_button_wrapper">
+        <input type="text" name="title" id="search" value="<%= searchOptions.title %>" placeholder="Search for a book by title" required>
+        <button type="search" value="go" id="go">Search</button>
+      </div>
+      <div class="search_extras">
+        <a href="/books/advancedSearch" class="advanced_options">Advanced Search Options</a>
+      </div>
     </form>
-    
-</div>
+  </div>
+</section>  
 
 <br>
 

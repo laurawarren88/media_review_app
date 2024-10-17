@@ -19,96 +19,160 @@
     font-size: 5em;
 }
 
-h1, .advanced_search_main_heading {
-    color: var(--almost-black);
-}
-
-/* search function */
-.main_search_area, .advanced_search_area {
+/* ***SEARCH FUNCTION - Main and advanced*** */
+.search_container {
     display: grid;
-    margin: 1em;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    align-items: start; 
+    margin: 2em auto;
+    width: 90%; 
 }
 
-.main_search_area {
-    justify-content: right;
+.search_area {
+    grid-column: 3; 
+    display: flex;
+    flex-direction: column; /* Change to column to stack heading and form */
+    justify-content: flex-start; /* Align at the top */
+    align-items: center; /* Center horizontally */
+    margin: 1.5em;
+    width: 100%; 
+}
+
+.main_search_heading {
+    text-align: center;
+    margin: 1em auto;
+    width: 100%;
 }
 
 .advanced_search_area {
+    grid-column: 2; 
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    margin-left: 0;
 }
 
 .advanced_search_heading {
     text-align: center;
-    margin: 2em;
+    margin: 1em 0;
+    width: 100%;
 }
 
-.search_form {
-    display: inline-flex;
-    align-items: center;
-    justify-self: center;
+.search_form, .advanced_search_form {
+    display: flex;
+    flex-direction: column;
     border-radius: 1em;
     box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
     overflow: hidden;
     padding: .75em;
     width: 100%;
+    margin-left: 0;
+}
+
+.advanced_search_form {
+    align-items: center;
+}
+
+.input_button_wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: .5em; 
 }
 
 .search_form #search {
+    width: 25em;
+    margin-right: 1em;
+    font-size: 1em;
+    height: 2em;
+}
+
+.search_form #search,
+.advanced_search_form #search {
     border: 1px solid var(--almost-black);
     box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
     border-radius: 3px;
     color: var(--blue);
-    float: left;
-    font: 3em;
-    height: 2em;
     padding: .5em;
-    width: 25em;
-    margin-right: 1em;
 }
 
-.search_form #search:focus {
+.advanced_search_form #search {
+    margin: 1em 0;
+    width: 90%;
+    font-size: 1.25em;
+    height: 2em;
+}
+
+.search_form #search:focus,
+.advanced_search_form #search:focus {
     border-color: #aaa;
     box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
     outline: 0;
 }
 
 .search_form #go {
+    width: 8em;
+}
+
+.search_form #go,
+.advanced_search_form #go {
     background-color: var(--light-pink);
     border-radius: .75em;
     box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
     color: var(--deep-orange);
     cursor: pointer;
     height: 2em;
-    float: right;
-    font: 3em;
+    font-size: 1em;
     text-align: center;
     font-weight: 900;
-    width: 5em;
+}
+
+.advanced_search_form #go {
+    width: 10em;
+    margin: 1em 0 2em 0;
 }
 
 .search_form #go:hover,
-.search_form #go:focus {
+.search_form #go:focus,
+.advanced_search_form #go:hover,
+.advanced_search_form #go:focus {
   background-color: var(--light-blue);
 }
 
-.search_form #go:active {
+.search_form #go:active,
+.advanced_search_form #go:active {
     box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
     outline: 0;
 }
 
-.advanced_search_text {
-    margin: 1em;
+.search_extras {
+    margin-top: 1em;
+    text-align: center;
 }
 
-/* login page */
+.advanced_options {
+    color: var(--light-blue);
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.advanced_options:hover {
+    color: var(--deep-orange);
+}
+
+.advanced_search_text {
+    font: 600;
+    font-size: 1.5em;
+}
+
+/* ***Authentication pages - Login, Register, Forgot Password*** */
 .login_main_body {
     background: linear-gradient(217deg, var(--light-pink), var(--blue), var(--deep-orange));
     background-repeat: no-repeat;
     background-size: 100%;
 }
 
-/* cards */
-.book_card, .login_card, .forgot_card {
+.login_card, .forgot_card {
     background-color: var(--light-blue);
     box-shadow: 1px 5px 4px var(--almost-black);
     border-radius: 2.5em;
@@ -187,6 +251,14 @@ h1, .advanced_search_main_heading {
 }
 
 /* book card */
+.book_card {
+    background-color: var(--light-blue);
+    box-shadow: 1px 5px 4px var(--almost-black);
+    border-radius: 2.5em;
+    padding: 0.5em;
+    margin: 3em;
+}
+
 .book_card {
     display: inline-block;
     width: 25%;

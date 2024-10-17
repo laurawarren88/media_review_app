@@ -4,114 +4,52 @@
     </div>
 </section>
 
-<section>
+<section class="search_container">
   <div class="search_area">
+    <h2 class="main_search_heading">Search for a book</h2>  
     <form  action="/" method="get"  class="search_form">
-      <input type="text" name="title" id="search" value="<%= searchOptions.title %>" placeholder="Search for a book by title" required>
-      <button type="search" value="go" id="go">Search</button>
-      <a href="/books/advancedSearch" class="">Advanced Search Options</a>
+      <div class="input_button_wrapper">
+        <input type="text" name="title" id="search" value="<%= searchOptions.title %>" placeholder="Search for a book by title" required>
+        <button type="search" value="go" id="go">Search</button>
+      </div>
+      <div class="search_extras">
+        <a href="/books/advancedSearch" class="advanced_options">Advanced Search Options</a>
+      </div>
     </form>
   </div>
-  <h1>Book Reviews</h1>
 </section>  
 
-<div>
-  <% books.forEach(book => { %>
-    <img height="100" width="150" src="<%= book.coverImagePath %>" alt="<%= book.title %>">
-    <div>
-      <%= book.title %> 
-      <%= book.author %>
-      <%= book.category %>
-      <%= book.description %>
+<h1 class="main_heading">Book Reviews</h1>
+
+  <section>
+    <% books.forEach(book => { %>
+    <div class="book_card">
+      <h3 class="title"><%= book.title %></h3>
+      <p class="author"><strong><%= book.author %></strong></p>
+      <p class ="category"><strong>Category:</strong> <%= book.category %></p>
+      <img height="100" width="150" src="<%= book.coverImagePath %>" alt="<%= book.title %>">
+      <p class="description"><%= book.description %></p>
+      
+      <div class="rating_section">
+        <p class="rating">Rate this book</p>
+          <div class="rate">
+            <input type="radio" id="star5" name="star">
+            <label for="star5"></label>
+
+            <input type="radio" id="star4" name="star">
+            <label for="star4"></label>
+
+            <input type="radio" id="star3" name="star">
+            <label for="star3"></label>
+
+            <input type="radio" id="star2" name="star">
+            <label for="star2"></label>
+
+            <input type="radio" id="star1" name="star">
+            <label for="star1"></label>
+          </div>
+            <a href="/reviews"><button class="review_button">Leave a review</button></a>
+      </div>
     </div>
-  <% }) %>
-  </div>
-
-    <section>
-      <div class="book_card">
-        <h3 class="title">Lord of the Rings: Fellowship of the Rings</h3>
-        <p class="author">By J.R. R. Tolkien</p>
-        <p class ="category">Category: Fantasy</p>
-        <img src="/Images/LOTR.jpg" alt="Lord of the Rings: Fellowship of the Rings">
-        <p class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima maiores, magnam corrupti voluptatibus ad laborum. Quasi fuga fugit deserunt perspiciatis repellendus magnam nulla, aliquam molestiae laborum minima beatae repudiandae nihil!</p>
-        
-        <div class="rating_section">
-          <p class="rating">Rate this book</p>
-            <div class="rate">
-              <input type="radio" id="star5" name="star">
-              <label for="star5"></label>
-
-              <input type="radio" id="star4" name="star">
-              <label for="star4"></label>
-
-              <input type="radio" id="star3" name="star">
-              <label for="star3"></label>
-
-              <input type="radio" id="star2" name="star">
-              <label for="star2"></label>
-
-              <input type="radio" id="star1" name="star">
-              <label for="star1"></label>
-            </div>
-              <a href="/reviews"><button class="review_button">Leave a review</button></a>
-        </div>
-      </div>
-
-      <div class="book_card">
-        <h3 class="title">Fourth Wing</h3>
-        <p class="author">By Rebecca Yarros</p>
-        <p class ="category">Category: Romance </p>
-        <img src="/Images/fourth_wing.jpg" alt="Lord of the Rings: Fellowship of the Rings">
-        <p class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima maiores, magnam corrupti voluptatibus ad laborum. Quasi fuga fugit deserunt perspiciatis repellendus magnam nulla, aliquam molestiae laborum minima beatae repudiandae nihil!</p>
-        
-        <div class="rating_section">
-          <p class="rating">Rate this book</p>
-            <div class="rate">
-              <input type="radio" id="star5" name="star">
-              <label for="star5"></label>
-
-              <input type="radio" id="star4" name="star">
-              <label for="star4"></label>
-
-              <input type="radio" id="star3" name="star">
-              <label for="star3"></label>
-
-              <input type="radio" id="star2" name="star">
-              <label for="star2"></label>
-
-              <input type="radio" id="star1" name="star">
-              <label for="star1"></label>
-            </div>
-              <a href="/reviews"><button class="review_button">Leave a review</button></a>
-        </div>
-      </div>
-
-      <div class="book_card">
-        <h3 class="title">Holly</h3>
-        <p class="author">By Stephen King</p>
-        <p class ="category">Category: Horror </p>
-        <img src="/Images/holly.jpg" alt="Lord of the Rings: Fellowship of the Rings">
-        <p class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima maiores, magnam corrupti voluptatibus ad laborum. Quasi fuga fugit deserunt perspiciatis repellendus magnam nulla, aliquam molestiae laborum minima beatae repudiandae nihil!</p>
-        
-        <div class="rating_section">
-          <p class="rating">Rate this book</p>
-            <div class="rate">
-              <input type="radio" id="star5" name="star">
-              <label for="star5"></label>
-
-              <input type="radio" id="star4" name="star">
-              <label for="star4"></label>
-
-              <input type="radio" id="star3" name="star">
-              <label for="star3"></label>
-
-              <input type="radio" id="star2" name="star">
-              <label for="star2"></label>
-
-              <input type="radio" id="star1" name="star">
-              <label for="star1"></label>
-            </div>
-              <a href="/reviews"><button class="review_button">Leave a review</button></a>
-        </div>
-      </div>
-      </section>
+    <% }) %>
+</section>

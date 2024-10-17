@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
         res.render('books/indexBooks', {
             title: "Media Review App", 
             books: books, 
-            searchOptions: req.query
+            searchOptions: {}
     })} catch {
         res.redirect('/')
     }
@@ -99,7 +99,7 @@ router.get('/advancedSearch', async (req, res) => {
         res.render('books/advancedSearch', {
             title: "Media Review App",
             books: books,
-            searchOptions: req.query // Keep the input fields populated with the user's search
+            searchOptions: {} // Clears the input fields populated with the user's search
         });
     } catch (error) {
         console.error(error);
