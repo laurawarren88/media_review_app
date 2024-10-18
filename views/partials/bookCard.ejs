@@ -1,0 +1,25 @@
+<section class="book_card_container">
+    <% books.forEach(book => { %>
+    <div class="book_card_area">
+  
+      <!-- Front of the card -->
+      <div class="book_card_front">
+        <img src="<%= book.coverImagePath %>" alt="<%= book.title %> cover">
+        <h3 class="book_card_title"><%= book.title %></h3>
+        <p class="book_card_author"><%= book.author %></p>
+        <p class ="book_card_category"><%= book.category %></p>
+      </div>
+  
+      <!-- Back of the card -->
+      <div class="book_card_back">
+        <p><%= book.description %></p>
+        <p>Average Rating: <%= book.averageRating %> / 5</p>
+        <button class="review_button"><a href="/reviews">Leave a review</a></button>
+        <a href="/books/<%= book.id %>">View</a>
+        <a href="/books/<%= book.id %>/edit">Edit</a>
+        <%- include('../partials/deleteForm', 
+                    { url: `/books/${book.id}`}) %>
+      </div>
+    </div>
+    <% }) %>
+  </section>

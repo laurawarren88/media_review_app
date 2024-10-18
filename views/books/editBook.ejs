@@ -1,11 +1,11 @@
-<h1 class="main_heading">Add a new book</h1>
-
+<h1 class="main_heading">Edit Book</h1>
+     
 <section class="new_book_container">
     <div class="new_book_area">
-        <form action="/books" method="post"  class="new_book_form">
+        <form action="/books/<%= book.id %>?_method=PUT" method="post" class="new_book_form">
             <%- include('_form_fields') %>
             <div class="form_actions">
-                <button type="search" id="create">Create</button>
+                <button type="search" id="create">Update</button>
                 <a href="/books">Cancel</a>
             </div>
         </form>

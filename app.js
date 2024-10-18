@@ -1,4 +1,5 @@
 import express from 'express';
+import methodOverride from 'method-override'; 
 import expressLayouts from 'express-ejs-layouts';
 import path from 'path';
 import mongoose from 'mongoose';
@@ -14,6 +15,8 @@ import reviewsRouter from './routes/reviews.js';
 
 // Import book model
 import Book from './models/bookModel.js';
+
+const app = express();
 
 // Load environment variables only in development mode
 if (process.env.NODE_ENV !== 'production') {
@@ -31,26 +34,17 @@ const db = mongoose.connection;
 db.on('error', error => console.error('MongoDB connection error:', error));
 db.once('open', () => console.log('MongoDB connection is open'));
 
-const app = express();
-
-// Server listening on port 3000 -localhost
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Serving on port ${PORT}`)
-      // npm run start - to run/start the application
-});
+// Middleware
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({limit: '10mb', extended: false}));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: false}));
+app.use(methodOverride('_method'));
 
 //View engine setup
 // app.engine('ejs', ejsMate)
 app.use(expressLayouts);
 app.set('layout', './layouts/boilerplate');
 app.set('view engine', 'ejs');
-
-// Middleware
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({limit: '10mb', extended: false}));
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: false}));
-
 
 //Additional file directories and be able to use __dirname with ES module
 const __filename = fileURLToPath(import.meta.url);
@@ -82,4 +76,11 @@ app.get('/', async (req, res) => {
 // Link all the routes to the different pages
 app.use('/books', booksRouter);
 app.use('/user', userRouter);
-app.use('/reviews', reviewsRouter)
+app.use('/reviews', reviewsRouter);
+
+// Server listening on port 3000 -localhost
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Serving on port ${PORT}`)
+      // npm run start - to run/start the application
+});
