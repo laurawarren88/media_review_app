@@ -21,35 +21,24 @@
 
 <h1 class="main_heading">Book Reviews</h1>
 
-  <section>
-    <% books.forEach(book => { %>
-    <div class="book_card">
-      <h3 class="title"><%= book.title %></h3>
-      <p class="author"><strong><%= book.author %></strong></p>
-      <p class ="category"><strong>Category:</strong> <%= book.category %></p>
-      <img height="100" width="150" src="<%= book.coverImagePath %>" alt="<%= book.title %>">
-      <p class="description"><%= book.description %></p>
-      
-      <div class="rating_section">
-        <p class="rating">Rate this book</p>
-          <div class="rate">
-            <input type="radio" id="star5" name="star">
-            <label for="star5"></label>
+<section class="book_card_container">
+  <% books.forEach(book => { %>
+  <div class="book_card_area">
 
-            <input type="radio" id="star4" name="star">
-            <label for="star4"></label>
-
-            <input type="radio" id="star3" name="star">
-            <label for="star3"></label>
-
-            <input type="radio" id="star2" name="star">
-            <label for="star2"></label>
-
-            <input type="radio" id="star1" name="star">
-            <label for="star1"></label>
-          </div>
-            <a href="/reviews"><button class="review_button">Leave a review</button></a>
-      </div>
+    <!-- Front of the card -->
+    <div class="book_card_front">
+      <img src="<%= book.coverImagePath %>" alt="<%= book.title %> cover">
+      <h3 class="book_card_title"><%= book.title %></h3>
+      <p class="book_card_author"><%= book.author %></p>
+      <p class ="book_card_category"><%= book.category %></p>
     </div>
-    <% }) %>
+
+    <!-- Back of the card -->
+    <div class="book_card_back">
+      <p><%= book.description %></p>
+      <p>Average Rating: <%= book.averageRating %> / 5</p>
+      <button class="review_button"><a href="/reviews">Leave a review</a></button>
+    </div>
+  </div>
+  <% }) %>
 </section>

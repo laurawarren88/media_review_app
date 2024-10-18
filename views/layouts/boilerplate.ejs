@@ -5,12 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- My StyleShhets -->
     <link href="/stylesheets/main.css" rel="stylesheet" type="text/css">
     <link href="/stylesheets/global.css" rel="stylesheet" type="text/css">
+
+    <!-- Font Stylesheets from google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <!-- stylesheets for filepond -->
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet"/>
 
     <title>Medica Review App</title>
 </head>
@@ -22,7 +28,15 @@
     <%- include('../partials/footer.ejs') %> 
 
 
-<script src="../../javascript/index.js"></script> 
-    
+    <!-- Stylesheets for file pond - enables saving image files directly to the database (CDN - docs/get started/javascript, plugins/file encoded, plugins/image preview, plugin/image resize ) -->
+    <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+
+      <!-- my scripts files -->
+      <script src="../../javascripts/index.js"></script> 
+      <script src="../../javascripts/fileUpload.js"></script>
+      
 </body>
 </html>

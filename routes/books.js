@@ -1,24 +1,12 @@
 import express from 'express';
-import path from 'path';
-import multer from 'multer';
-import fs from 'fs';
-
-// Linking the books models for MongoDB collections and saving cover images to a file
-import Book, { coverImageBasePath } from '../models/bookModel.js';
-
 const router = express.Router();
+import multer from 'multer';
+import Book from '../models/bookModel.js';
 
-const uploadPath = path.join('public', coverImageBasePath);
-const imageMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif']; //The images the upload function supports
-const upload = multer ({
-    dest: uploadPath,
-    fileFilter: (req, file, callback) => {
-        const isValid = imageMimeTypes.includes(file.mimetype);
-        callback(null, isValid);
-        if (!isValid) {
-            callback(new Error('Invalid file type. Only images are allowed.'));
-        }
-    }
+const imageMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+// Configure multer with a file size limit (e.g., 10MB)
+const upload = multer({
+    limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
 });
 
 // Linking the review models for MongoDB collections 
@@ -43,28 +31,27 @@ router.get('/', async (req, res) => {
 });
 
 // **** At the moment anyone can add a book but need to chnage this to only admin ****
-router.get('/new', (req, res) => {
+router.get('/new', async (req, res) => {
     renderNewPage(res, new Book())
 });
 
-router.post('/', upload.single('cover'), async (req, res) => {
-    console.log('File uploaded:', req.file);
-    const filename = req.file != null ? req.file.filename : null;
+router.post('/', async (req, res) => { 
     const book = new Book({
         title: req.body.title,
         author: req.body.author,
         category: req.body.category,
-        coverImageName: filename,
         description: req.body.description
-    });
+    })
+    // saveCover(book, req.body.cover)
+    if (req.body.cover && req.body.cover !== '') {
+        saveCover(book, req.body.cover);
+    }
+
     try{
         const newBook = await book.save();
         // res.redirect(`books/${newBook.id}`)
         res.redirect('books');
     }   catch {
-        if (book.coverImageName != null) {
-            removeBookCover(book.coverImageName)
-        }
             renderNewPage(res, book, true)
         };
     });
@@ -107,19 +94,10 @@ router.get('/advancedSearch', async (req, res) => {
     }
 });
 
-
-
 // Displays categories for books
 router.get('/categories', (req, res) => {
     res.render('books/categories', {title: "Media Review App"});
 });
-
-// Function to remove a book cover when an error occured creating a book
-function removeBookCover(fileName) {
-    fs.unlink(path.join(uploadPath, fileName), err => {
-        if (err) console.log(err)
-    })
-}
 
 //Function to link back to the new books page
 async function renderNewPage(res, book, hasError = false) {
@@ -135,4 +113,73 @@ async function renderNewPage(res, book, hasError = false) {
     }
 };
 
+// Function to save book cover when added in the new book upload form
+// function saveCover(book, coverEncoded) {
+//     if (coverEncoded == null) return
+//     const cover = JSON.parse(coverEncoded)
+//     if (cover != null && imageMimeTypes.includes(cover.type)) {
+//       book.coverImage = new Buffer.from(cover.data, 'base64')
+//       book.coverImageType = cover.type
+//     }
+//   };
+
+function saveCover(book, coverEncoded) {
+    if (coverEncoded == null) return;
+    const cover = JSON.parse(coverEncoded); // Convert base64 string into JSON object
+    if (cover && cover.data && cover.type) {
+        book.coverImage = Buffer.from(cover.data, 'base64'); // Decode base64 string
+        book.coverImageType = cover.type;
+    }
+}
+
 export default router;
+
+// *** code removed due to FilePond: - Reinsert and swap out if not useing FilePond
+// import multer from 'multer';
+// import fs from 'fs';
+// import path from 'path';
+// const uploadPath = path.join('public', coverImageBasePath);
+// Linking the books models for MongoDB collections and saving cover images to a file
+// import Book, { coverImageBasePath } from '../models/bookModel.js';
+
+// const upload = multer ({
+//     dest: uploadPath,
+//     fileFilter: (req, file, callback) => {
+//         const isValid = imageMimeTypes.includes(file.mimetype);
+//         callback(null, isValid);
+//         if (!isValid) {
+//             callback(new Error('Invalid file type. Only images are allowed.'));
+//         }
+//     }
+// });
+
+// Use this post route if not using FilePond
+// router.post('/',  upload.single('cover'), async (req, res) => {
+//     console.log('File uploaded:', req.file); 
+//     const filename = req.file != null ? req.file.filename : null; 
+//     const book = new Book({
+//         title: req.body.title,
+//         author: req.body.author,
+//         category: req.body.category,
+//         coverImageName: filename, 
+//         description: req.body.description
+//     });
+
+//     try{
+//         const newBook = await book.save();
+//         // res.redirect(`books/${newBook.id}`)
+//         res.redirect('books');
+//     }   catch {
+//         if (book.coverImageName != null) {
+//             removeBookCover(book.coverImageName)
+//         }
+//             renderNewPage(res, book, true)
+//         };
+//     });
+
+// Function to remove a book cover when an error occured creating a book
+// function removeBookCover(fileName) {
+//     fs.unlink(path.join(uploadPath, fileName), err => {
+//         if (err) console.log(err)
+//     })
+// }

@@ -1,0 +1,84 @@
+/**** AUTHENTICATION PAGES - Login, Register, Forgot Password ****/
+.login_main_body {
+    background: linear-gradient(217deg, var(--light-pink), var(--blue), var(--deep-orange));
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.login_card, .forgot_card {
+    background-color: var(--light-blue);
+    box-shadow: 1px 5px 4px var(--almost-black);
+    border-radius: 2.5em;
+    padding: 0.5em;
+    margin: 3em;
+}
+
+.login_card {
+    width: 30%;
+}
+
+.forgot_card {
+    width: 40%;
+}
+
+.login_card, .forgot_card {
+    color: var(--almost-black);
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.auth_heading {
+    text-align: center;
+    padding-top: 1em;
+    font-size: 3em;
+}
+
+.login_card form, .forgot_card form {
+    text-align: center;
+    padding: .5em;
+}
+
+.username_label, .password_label, .email_label {
+    display: block;
+    padding-top: 1em;
+    font-size: 1.5em;
+}
+
+#username, #password, #email{
+    border-radius: .5em;
+    width: 70%;
+    padding: .35em;
+    margin: .25em;
+}
+
+.no_account, .forgot{
+    font-size: .75em;
+}
+
+.no_account {
+    padding-right: 3em;
+}
+
+#submit {
+    width: 40%;
+}
+
+#reset {
+    width: 50%;
+}
+
+#submit, #reset {
+    margin-top: 1em;
+    font-size: 2em;
+    border-radius: .35em;
+    background-color: var(--deep-orange);
+}
+
+#home_link {
+    display: block;
+    font-size: 1em;
+    text-decoration: underline;
+    margin: 1em;
+}

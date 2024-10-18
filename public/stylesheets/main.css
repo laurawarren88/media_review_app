@@ -1,25 +1,4 @@
-.cta {
-    background: url('/Images/cta.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 35em;
-    width: auto;
-}
-
-.cta h2 {
-    display: flex;
-    position: absolute;
-    width: 100%;
-    top: 30%;
-    text-align: center;
-    left: 30%;
-    /* border: 5px solid red; */
-    color: var(--light-pink);
-    font-size: 5em;
-}
-
-/* ***SEARCH FUNCTION - Main and advanced*** */
+/** SEARCH FUNCTION - Main and advanced **/
 .search_container {
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr;
@@ -31,9 +10,9 @@
 .search_area {
     grid-column: 3; 
     display: flex;
-    flex-direction: column; /* Change to column to stack heading and form */
-    justify-content: flex-start; /* Align at the top */
-    align-items: center; /* Center horizontally */
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: center; 
     margin: 1.5em;
     width: 100%; 
 }
@@ -165,156 +144,233 @@
     font-size: 1.5em;
 }
 
-/* ***Authentication pages - Login, Register, Forgot Password*** */
-.login_main_body {
-    background: linear-gradient(217deg, var(--light-pink), var(--blue), var(--deep-orange));
+/** HOME PAGE **/
+.cta {
+    background: url('/Images/cta.jpg');
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: 100%;
+    height: 35em;
+    width: auto;
 }
 
-.login_card, .forgot_card {
+.cta h2 {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    top: 30%;
+    text-align: center;
+    left: 30%;
+    /* border: 5px solid red; */
+    color: var(--light-pink);
+    font-size: 5em;
+}
+
+/** Book card **/
+.book_card_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 5em 2em 20em; 
+    perspective: 1000px; /* Needed for the 3D flip effect */
+}
+
+.book_card_area {
     background-color: var(--light-blue);
-    box-shadow: 1px 5px 4px var(--almost-black);
-    border-radius: 2.5em;
-    padding: 0.5em;
-    margin: 3em;
-}
-
-.login_card {
-    width: 30%;
-}
-
-.forgot_card {
-    width: 40%;
-}
-
-.login_card, .forgot_card {
-    color: var(--almost-black);
-    position: fixed;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.auth_heading {
-    text-align: center;
-    padding-top: 1em;
-    font-size: 3em;
-}
-
-.login_card form, .forgot_card form {
-    text-align: center;
-    padding: .5em;
-}
-
-.username_label, .password_label, .email_label {
-    display: block;
-    padding-top: 1em;
-    font-size: 1.5em;
-}
-
-#username, #password, #email{
-    border-radius: .5em;
-    width: 70%;
-    padding: .35em;
-    margin: .25em;
-}
-
-.no_account, .forgot{
-    font-size: .75em;
-}
-
-.no_account {
-    padding-right: 3em;
-}
-
-#submit {
-    width: 40%;
-}
-
-#reset {
-    width: 50%;
-}
-
-#submit, #reset {
-    margin-top: 1em;
-    font-size: 2em;
-    border-radius: .35em;
-    background-color: var(--deep-orange);
-}
-
-#home_link {
-    display: block;
-    font-size: 1em;
-    text-decoration: underline;
+    width: 300px;
+    height: 450px;
     margin: 1em;
-}
-
-/* book card */
-.book_card {
-    background-color: var(--light-blue);
-    box-shadow: 1px 5px 4px var(--almost-black);
-    border-radius: 2.5em;
-    padding: 0.5em;
-    margin: 3em;
-}
-
-.book_card {
     display: inline-block;
-    width: 25%;
+    position: relative;
+    border-radius: 0.5em;
+    transition: transform 0.6s ease-in-out;
+    transform-style: preserve-3d;
+    box-shadow: 2px 6px 12px var(--almost-black);
 }
 
-.title {
-    font-size: 1.5em;
+.book_card_area:hover {
+    transform: rotateY(180deg);
+}
+
+/* Front and back of the card */
+.book_card_front, .book_card_back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 0 0 5px 5px;
+}
+
+.book_card_front {
+    background-color: var(--light-blue);
+}
+
+.book_card_front img {
+    width: 100%;
+    height: 70%; 
+    object-fit: cover;
+}
+
+.book_card_title {
+    font-size: 1.25em;
     text-align: center;
-    margin-top: 1em;
+    margin: 0.2em 0.15em;
 }
 
-.author, .category {
+.book_card_author, .book_card_category {
     text-align: center;
-    padding: .25em;
+    font-size: 1em;
+    margin-top: 0.2em;
 }
 
-.book_card img {
-    display: grid;
-    margin: auto;
-    height: 20em;
-    padding: 2em 0;
+/* Back of card */
+.book_card_back {
+    background-color: var(--light-blue); 
+    color: var(--almost-black);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.25em;
+    font-size: 1.1em;
 }
 
-.description {
+.book_card_back p {
     text-align: justify;
-    padding: 1em;
+    margin-bottom: 1em;
 }
 
-.book_card button {
+.book_card_back .book_card_rating {
+    text-align: center;
+    margin-top: auto;
+}
+
+.book_card_back .book_card_rate {
+    display: flex;
+    justify-content: center;
+}
+
+.review_button {
     display: grid;
     margin: auto;
-    padding: .5em;
+    justify-content: center;
+    align-items: center;
     background-color: var(--deep-orange);
     border-radius: .5em;
     height: 3em;
     width: 10em;
 }
 
+/** ADD A NEW BOOK Form **/
+.new_book_container {
+    display: flex;
+    justify-content: center;
+    margin: 2em auto;
+    width: 80%;
+}
+
+.new_book_area {
+    width: 100%;
+}
+
+.new_book_form {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* 2 columns: 2/3 for inputs, 1/3 for cover image */
+    gap: 1em;
+    padding: 2em;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    border-radius: 1em;
+}
+
+.new_book_info {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.new_book_info input, .new_book_info textarea {
+    width: 100%;
+    padding: 0.75em;
+    border: 1px solid var(--almost-black);
+    color: var(--blue);
+    border-radius: 3px;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    font-size: 1.25em;
+}
+
+.new_book_info textarea {
+    height: 20em;
+}
+
+.new_book_info input:focus, .new_book_info textarea:focus {
+    border-color: #aaa;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    outline: 0;
+}
+
+.new_book_cover input[type="file"] {
+    width: 100%;
+} 
+
+.form_actions {
+    grid-column: span 2; /* Make the buttons span across both columns */
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    margin-top: 1em;
+}
+
+.form_actions button {
+    background-color: var(--light-pink);
+    width: 25%;
+}
+
+.form_actions button, .form_actions a {
+    padding: 0.75em;
+    display: flex; /* Use flexbox to center text */
+    justify-content: center; /* Center horizontally */
+    align-items: center; 
+    text-align: center;
+    border-radius: 0.75em;
+    color: var(--deep-orange);
+    cursor: pointer;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    height: 2.5em;
+    font-size: 1em;
+    font-weight: 900;
+}
+
+.form_actions a {
+    background-color: var(--blue);
+    width: 10%;
+}
+
+.form_actions button:hover, .form_actions button:focus,
+.form_actions a:hover, .form_actions a:focus {
+    background-color: var(--light-blue);
+}
+
+
 /* Rating feature */
-.rating {
+/* .book_card_rating {
     text-align: center;
 }
 
-.rate {
+.book_card_rate {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 3em;
     flex-direction: row-reverse;
-}
+} */
 
-.rate input {
+/* .book_card_rate input {
     display: none;
 }
 
-.rate label {
+.book_card_rate label {
     float: left;
     width: 1em;
     overflow: hidden;
@@ -325,23 +381,22 @@
     transition: color 0.2s ease-in-out;
 }
 
-.rate label:before {
+.book_card_rate label:before {
     content: '★';
 }
 
-.rate input:checked {
+.book_card_rate input:checked {
     color: var(--deep-pink);    
 }
 
-.rate, label:hover,
-.rate > label:hover ~ label {
+.book_card_rate, label:hover,
+.book_card_rate > label:hover ~ label {
     color: var(--deep-pink);  
 }
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
+.book_card_rate > input:checked + label:hover,
+.book_card_rate > input:checked + label:hover ~ label,
+.book_card_rate > input:checked ~ label:hover,
+.book_card_rate > input:checked ~ label:hover ~ label,
+.book_card_rate > label:hover ~ input:checked ~ label {
     color: var(--deep-pink);
-} 
-
+}  */

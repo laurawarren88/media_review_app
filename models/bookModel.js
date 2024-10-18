@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
+import { type } from 'os';
 import path from 'path';
 
-export const coverImageBasePath = 'uploads/bookCovers';
 
 const bookSchema = new mongoose.Schema({
     title: {
@@ -16,7 +16,14 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    coverImageName: {
+    // coverImageName: {
+    coverImage: {
+        // type: String, - Use if not using FilePond
+        type: Buffer,
+        required: true
+    },
+    // Dont need this key value pair if not using FilePond
+    coverImageType: {
         type: String,
         required: true
     },
@@ -35,10 +42,19 @@ const bookSchema = new mongoose.Schema({
 });
 
 bookSchema.virtual('coverImagePath').get(function() {
-    if(this.coverImageName != null) {
-        return path.join('/', coverImageBasePath, this.coverImageName)
+    if(this.coverImage != null && this.coverImageType != null ) {
+        return `data:${this.coverImageType};charset=utf;base64,${this.coverImage.toString('base64')}`
     }
 });
 
 // module.exports = mongoose.model('Book', bookSchema);
 export default mongoose.model('Book', bookSchema);
+
+// Removed due to FilePond
+// bookSchema.virtual('coverImagePath').get(function() {
+//     if(this.coverImageName != null) {
+//         return path.join('/', coverImageBasePath, this.coverImageName)
+//     }
+// });
+
+// export const coverImageBasePath = 'uploads/bookCovers';

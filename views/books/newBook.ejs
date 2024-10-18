@@ -1,8 +1,21 @@
-<h1 class="main_heading">Add a new book</h1>  
-<div class="search_area">
-    <form action="/books" method="post" enctype="multipart/form-data" class="search_form">
-        <%- include('_form_fields') %>
-        <a href="/books">Cancel</a>
-        <button type="submit">Create</button>
-    </form>
-</div>
+<h1 class="main_heading">Add a new book</h1>
+
+<section class="new_book_container">
+    <div class="new_book_area">
+        <form action="/books" method="post"  class="new_book_form"> <!-- If not using filePond, input this line = enctype="multipart/form-data" -->
+            <div class="new_book_info">
+                <input type="text" name="title" value="<%= book.title %>" placeholder="Title" required>
+                <input type="text" name="author" value="<%= book.author %>" placeholder="Author" required>
+                <input type="text" name="category" value="<%= book.category %>" placeholder="Category" required>
+                <textarea name="description" placeholder="Breif description of the book" required><%= book.description %></textarea>
+            </div>
+            <div class="new_book_cover">
+                <input type="file" name="cover" class="filepond" required>
+            </div>
+            <div class="form_actions">
+                <button type="search" id="create">Create</button>
+                <a href="/books">Cancel</a>
+            </div>
+        </form>
+    </div>
+</section>

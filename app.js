@@ -47,9 +47,9 @@ app.set('layout', './layouts/boilerplate');
 app.set('view engine', 'ejs');
 
 // Middleware
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({limit: '10mb', extended: false}));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: false}));
 
 
 //Additional file directories and be able to use __dirname with ES module
