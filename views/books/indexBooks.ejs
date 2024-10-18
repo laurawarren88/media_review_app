@@ -1,14 +1,18 @@
 <h1 class="main_heading">All Books</h1>
 
-<a href="/books/new">Add a new Book</a>
+
+
 
 <section class="search_container">
+  <div class="add_new_book">
+    <a class="add_new_book_link" href="/books/new">Add a new Book</a>
+  </div>
   <div class="search_area">
     <h2 class="main_search_heading">Search for a book</h2>  
     <form  action="/" method="get"  class="search_form">
       <div class="input_button_wrapper">
         <input type="text" name="title" id="search" value="<%= searchOptions.title %>" placeholder="Search for a book by title" required>
-        <button type="search" value="go" id="go">Search</button>
+        <button type="search" id="go">Search</button>
       </div>
       <div class="search_extras">
         <a href="/books/advancedSearch" class="advanced_options">Advanced Search Options</a>
