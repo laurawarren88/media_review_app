@@ -46,7 +46,7 @@
     font-size: 1.5em;
 }
 
-#username, #password, #email{
+#username, #password, #email, #confirm_password{
     border-radius: .5em;
     width: 70%;
     padding: .35em;

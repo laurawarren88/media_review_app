@@ -29,5 +29,4 @@ const reviewSchema = new mongoose.Schema({
     }
 });
 
-// module.exports = mongoose.model('Book', bookSchema);
 export default mongoose.model('Review', reviewSchema);

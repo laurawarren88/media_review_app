@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
 
-const signupSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     username: {
-        type: String,
-        required: true,
-        unique: true
+        type: String, 
+        required: true
     },
     email: {
         type: String,
@@ -18,5 +17,4 @@ const signupSchema = new mongoose.Schema({
     }
 });
 
-// module.exports = mongoose.model('Book', bookSchema);
-export default mongoose.model('Signup', signupSchema);
+export default mongoose.model('User', userSchema);

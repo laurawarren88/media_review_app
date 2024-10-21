@@ -34,15 +34,14 @@ router.get('/new', async (req, res) => {
 });
 
 router.post('/', async (req, res) => { 
+    const { title, author, category, description } = req.body;
     const book = new Book({
-        title: req.body.title,
-        author: req.body.author,
-        category: req.body.category,
-        description: req.body.description
+        title: title,
+        author: author,
+        category: category,
+        description: description
     })
-    if (req.body.cover && req.body.cover !== '') {
         saveCover(book, req.body.cover);
-    }
 
     try{
         const newBook = await book.save();
@@ -105,34 +104,33 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/edit', async (req, res) => {
     try {
         const book = await Book.findById(req.params.id)
-        res.render('books/editBook', { 
-            title: "Media Review App",
-            book: book
-        })
+        renderEditPage(res, book)
     } catch {
-        res.redirect('/books')
+        res.redirect('/')
     }
     
 });
 
 router.put('/:id', async (req,res) => {
+    const { title, author, category, description, cover } = req.body;
     let book
+
     try {
         book = await Book.findById(req.params.id)
-        book.title = req.body.title,
-        book.author = req.body.author,
-        book.category = req.body.category,
-        book.description = req.body.description
+        book.title = title,
+        book.author = author,
+        book.category = category,
+        book.description = description
+        if (cover != null && cover !== '') {
+            saveCover(book, cover);
+        }
         await book.save()
         res.redirect(`/books/${book.id}`)
     } catch {
-        if (book == null) {
-            res.redirect("/")
+        if (book != null) {
+            renderEditPage(res, book, true)
         } else {
-            res.render('book/edit', {
-                book: book,
-                errorMessage: 'Error updating book'
-            })
+            redirect('/')
         }
     }
 });
@@ -150,17 +148,31 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-//Function to link back to the new books page
 async function renderNewPage(res, book, hasError = false) {
+    renderFormPage(res, book, 'newBook', hasError)
+  };
+  
+  async function renderEditPage(res, book, hasError = false) {
+    renderFormPage(res, book, 'editBook', hasError)
+  };
+
+//Function to link back to the new books page
+async function renderFormPage(res, book, form, hasError = false) {
     try {
         const params = {
             title: "Media Review App",
             book: book
         }
-        if (hasError) params.errorMessage = 'Error Creating Book'
-        res.render('books/newBook', params ) 
+        if (hasError) {
+            if (form === 'edit') {
+              params.errorMessage = 'Error Updating Book'
+            } else {
+              params.errorMessage = 'Error Creating Book'
+            }
+          }
+          res.render(`books/${form}`, params)
     } catch {
-        res.redirect(`/books/${book.id}`)
+        res.redirect(`/books`)
     }
 };
 

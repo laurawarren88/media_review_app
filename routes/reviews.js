@@ -4,7 +4,7 @@ const router = express.Router();
 // Linking the models for MongoDB collections
 import Review from '../models/reviewModel.js';
 import Book from '../models/bookModel.js';
-import Login from '../models/loginModel.js';
+import User from '../models/userModel.js';
 
 // Displays all the reviews
 router.get('/', async (req, res) => {

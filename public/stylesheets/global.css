@@ -29,6 +29,12 @@ body, html {
     --deep-orange: rgb(255, 190, 22);
 }
 
+/* Sets the container for the whole webpage so it is all aligned */
+.body_container {
+    max-width: 1500px;
+    margin: auto;
+    margin-bottom: 3rem;
+}
 
 /* navbar */
 header {

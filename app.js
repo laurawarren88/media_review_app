@@ -3,6 +3,8 @@ import methodOverride from 'method-override';
 import expressLayouts from 'express-ejs-layouts';
 import path from 'path';
 import mongoose from 'mongoose';
+import session from 'express-session';
+import { default as connectMongoDBSession} from 'connect-mongodb-session';
 import 'dotenv/config';
 import bodyParser from 'body-parser';
 import { fileURLToPath } from 'url';
@@ -36,9 +38,31 @@ db.once('open', () => console.log('MongoDB connection is open'));
 
 // Middleware
 app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({limit: '10mb', extended: false}));
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: false}));
+app.use(express.urlencoded({limit: '10mb', extended: true}));
 app.use(methodOverride('_method'));
+
+const secret = process.env.SECRET;
+const MongoDBStore = connectMongoDBSession(session);
+
+// Will default to the collection 'sessions' if name not set
+const store = new MongoDBStore({
+  uri: DATABASE_URL,
+  databaseName: 'media_review_app'
+});
+
+// Catch errors
+store.on('error', function(error) {
+  console.log(error);
+});
+
+// This will store values like user info in the session send it to the DB and store this info in a cookie and send it to the user
+app.use(session({
+  secret,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 1000 * 60 * 60 * 24 }, //Cookie is equal to one day
+  store
+}));
 
 //View engine setup
 // app.engine('ejs', ejsMate)
