@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import { type } from 'os';
 import path from 'path';
 
-
 const bookSchema = new mongoose.Schema({
     title: {
         type: String, 
@@ -16,13 +15,10 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // coverImageName: {
     coverImage: {
-        // type: String, - Use if not using FilePond
         type: Buffer,
         required: true
     },
-    // Dont need this key value pair if not using FilePond
     coverImageType: {
         type: String,
         required: true
@@ -47,14 +43,4 @@ bookSchema.virtual('coverImagePath').get(function() {
     }
 });
 
-// module.exports = mongoose.model('Book', bookSchema);
 export default mongoose.model('Book', bookSchema);
-
-// Removed due to FilePond
-// bookSchema.virtual('coverImagePath').get(function() {
-//     if(this.coverImageName != null) {
-//         return path.join('/', coverImageBasePath, this.coverImageName)
-//     }
-// });
-
-// export const coverImageBasePath = 'uploads/bookCovers';

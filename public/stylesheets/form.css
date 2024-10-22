@@ -1,0 +1,259 @@
+/** SEARCH FUNCTION - Main and advanced **/
+.search_container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    align-items: start; 
+    margin: 2em auto;
+    width: 90%; 
+}
+
+.add_new_book {
+    grid-column: 1; 
+    display: grid;
+    align-items: center; 
+    justify-content: center;
+    margin: auto;
+    width: 100%; 
+}
+
+.add_new_book_link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blue);
+    border-radius: .75em;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    color: var(--deep-orange);
+    cursor: pointer;
+    height: 2.5em;
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: 900;
+    width: 15em;
+}
+
+.search_area {
+    grid-column: 3; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: center; 
+    margin: 1.5em;
+    width: 100%; 
+}
+
+.main_search_heading {
+    text-align: center;
+    margin: 1em auto;
+    width: 100%;
+}
+
+.advanced_search_area {
+    grid-column: 2; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+}
+
+.advanced_search_heading {
+    text-align: center;
+    margin: 1em 0;
+    width: 100%;
+}
+
+.search_form, .advanced_search_form {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1em;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    overflow: hidden;
+    padding: .75em;
+    width: 100%;
+    margin-left: 0;
+}
+
+.advanced_search_form {
+    align-items: center;
+}
+
+.input_button_wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: .5em; 
+}
+
+.search_form #search {
+    width: 25em;
+    margin-right: 1em;
+    font-size: 1em;
+    height: 2em;
+}
+
+.search_form #search,
+.advanced_search_form #search {
+    border: 1px solid var(--almost-black);
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    border-radius: 3px;
+    color: var(--blue);
+    padding: .5em;
+}
+
+.advanced_search_form #search {
+    margin: 1em 0;
+    width: 90%;
+    font-size: 1.25em;
+    height: 2em;
+}
+
+.search_form #search:focus,
+.advanced_search_form #search:focus {
+    border-color: #aaa;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    outline: 0;
+}
+
+.search_form #go {
+    width: 8em;
+}
+
+.search_form #go,
+.advanced_search_form #go {
+    background-color: var(--light-pink);
+    border-radius: .75em;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    color: var(--deep-orange);
+    cursor: pointer;
+    height: 2em;
+    font-size: 1em;
+    text-align: center;
+    font-weight: 900;
+}
+
+.advanced_search_form #go {
+    width: 10em;
+    margin: 1em 0 2em 0;
+}
+
+.search_form #go:hover,
+.search_form #go:focus,
+.advanced_search_form #go:hover,
+.advanced_search_form #go:focus {
+  background-color: var(--light-blue);
+}
+
+.search_form #go:active,
+.advanced_search_form #go:active {
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    outline: 0;
+}
+
+.search_extras {
+    margin-top: 1em;
+    text-align: center;
+}
+
+.advanced_options {
+    color: var(--light-blue);
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.advanced_options:hover {
+    color: var(--deep-orange);
+}
+
+.advanced_search_text {
+    font: 600;
+    font-size: 1.5em;
+}
+
+/** ADD A NEW BOOK Form and Link **/
+.new_book_container {
+    display: flex;
+    justify-content: center;
+    margin: 2em auto;
+    width: 80%;
+}
+
+.new_book_area {
+    width: 100%;
+}
+
+.new_book_form {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1em;
+    padding: 2em;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    border-radius: 1em;
+}
+
+.new_book_info {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.new_book_info input, .new_book_info textarea {
+    width: 100%;
+    padding: 0.75em;
+    border: 1px solid var(--almost-black);
+    color: var(--blue);
+    border-radius: 3px;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    font-size: 1.25em;
+}
+
+.new_book_info textarea {
+    height: 20em;
+}
+
+.new_book_info input:focus, .new_book_info textarea:focus {
+    border-color: #aaa;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    outline: 0;
+}
+
+.new_book_cover input[type="file"] {
+    width: 100%;
+} 
+
+.form_actions {
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    margin-top: 1em;
+}
+
+.form_actions button {
+    background-color: var(--light-pink);
+    width: 25%;
+}
+
+.form_actions button, .form_actions a {
+    padding: 0.75em;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center;
+    border-radius: 0.75em;
+    color: var(--deep-orange);
+    cursor: pointer;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    height: 2.5em;
+    font-size: 1em;
+    font-weight: 900;
+}
+
+.form_actions a {
+    background-color: var(--blue);
+    width: 10%;
+}
+
+.form_actions button:hover, .form_actions button:focus,
+.form_actions a:hover, .form_actions a:focus {
+    background-color: var(--light-blue);
+}

@@ -48,6 +48,19 @@ const __dirname = path.dirname(__filename);
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Set up middleware to pass user data to all views
+// app.use((req, res, next) => {
+//     res.locals.user = req.session.user || null;
+//     res.locals.isLoggedIn = req.session.userId ? true : false;
+//     next();
+// });
+
+app.use((req, res, next) => {
+    res.locals.currentUser = req.session.user || null; // Pass the user data to all views
+    res.locals.isLoggedIn = !!req.session.user; 
+    next();
+});
+
 // Apply routes
 setupRoutes(app);
 

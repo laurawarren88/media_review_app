@@ -1,12 +1,14 @@
 import express from 'express';
-const router = express.Router();
 import bcrypt from 'bcrypt';
 
 // Linking the models for MongoDB collections
 import User from '../models/userModel.js'
 
+const router = express.Router();
+
 router.get('/login', (req, res) => {
-    res.render('user/login', {title: "Media Review App", layout: './layouts/auth'})
+    const message = req.query.message;
+    res.render('user/login', {title: "Media Review App", layout: './layouts/auth', message})
 });
 
 router.get('/signup', (req, res) => {
@@ -28,14 +30,13 @@ router.post('/signup', async (req, res) => {
         return res.render('partials/errorMessage', { errorMessage: "Invalid email address" })
     }
 
-    if (password.length < 7 ) {
+    if (password.length < 8 ) {
         return res.render('partials/errorMessage', { errorMessage: "Password is too short, must be at least 8 characters" })
     }
 
     if (password !== confirm_password) {
         return res.render('partials/errorMessage', { errorMessage: "Passwords do not match!" });
     }
-
 
     try {
         // Check if user with the given email already exists
@@ -49,15 +50,13 @@ router.post('/signup', async (req, res) => {
             }
         }
     
-    const saltRounds = 10
-    const hashedPassword = await bcrypt.hash(password.trim(), saltRounds)
+    const hashedPassword = await bcrypt.hash(password.trim(), 10)
     const newUser = new User({
         username: username.trim(),
         email: email.trim(),
         password: hashedPassword
     });
-    const savedUser = await newUser.save();
-    console.log(savedUser)
+    await newUser.save();
     res.redirect('login')       
     } catch (err) {
         console.error(err)
@@ -67,30 +66,27 @@ router.post('/signup', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
+    const redirectTo = req.query.redirect || '/';
 
-    // Basic validation
     if (username.trim() === '' || password.trim() === '') {
         return res.render('partials/errorMessage', { errorMessage: "Empty input field!" });
     }
-
     try {
-        // Find the user by username
         const user = await User.findOne({ username });
-
         if (!user) {
-            // User does not exist
             return res.render('partials/errorMessage', { errorMessage: "Invalid credentials!" });
         }
-
         // Compare entered password with the hashed password
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (isMatch) {
-            // Passwords match, login successful
-            res.json({
-                status: "SUCCESS",
-                message: "Signin successful"
-            });
+            // Passwords match, login successful and redirected to the home page
+            req.session.user = {
+                _id: user._id,
+                username: user.username,
+                isAdmin: user.isAdmin 
+            };
+            res.redirect(redirectTo); 
         } else {
             // Passwords do not match
             return res.render('partials/errorMessage', { errorMessage: "Invalid password!" });
@@ -106,8 +102,14 @@ router.get('/forgot_password', (req, res) => {
     res.render('user/forgot_password', {title: "Media Review App", layout: './layouts/auth'})
 });
 
-router.delete('/logout', (req, res) => {
-    res.render('logout', {title: "Media Review App", layout: './layouts/auth'})
+router.post('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.log('Error logging out:', err);
+            return res.redirect('/');
+        }
+        res.redirect('/');
+    });
 });
 
 export default router;

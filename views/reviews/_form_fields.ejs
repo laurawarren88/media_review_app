@@ -1,15 +1,16 @@
 <p>Username</p>
-<label for="bookTitle">Title</label>
-<input type="text" name="title" id="search" value="<%= book.title %>" placeholder="Title" required>
-
-<label for="bookauthor"></label>
-<input type="text" name="author" id="search" value="<%= book.author %>" placeholder="Author" required>
+<div class="new_review_info">
+    <input type="text" name="title" value="<%= book.title %>" placeholder="Title" required>
+    <input type="text" name="author" value="<%= book.author %>" placeholder="Author" required>
+    <textarea name="description" placeholder="Breif description of the book" required><%= book.description %></textarea>
+</div>
+<div class="new_book_cover">
+    <input type="file" name="cover" class="filepond" required>
+</div>
 
 <label for="rating">Rating</label>
-<input type="text" name="category" id="search" min="1" value="<%= book.category %>" placeholder="Category" required>
 
 <label for="reviewText">Review Text</label>
-<!-- reviews links to the variable given in the routes folder and reviewText links to the input [name] field -->
 <input type="text" name="reviewText" value="<%= review.reviewText  %>">
 
 

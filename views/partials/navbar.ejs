@@ -14,10 +14,17 @@
             <div class="social">
               <a href="https://www.facebook.com" target="_blank"><span class="facebook"><img src="/Images/facebook.png" alt="facebook-link"/></span></a>
               <a href="https://www.instagram.com" target="_blank"><span class="instagram"><img src="/Images/instagram.png" alt="instagram-link"/></span></a>
-            </div>
-            <div class="auth">
+            </div>    
+      <div class="auth">
+          <% if (isLoggedIn) { %> 
+              <span>Welcome, <%= currentUser.username %>!</span>
+              <form action="/user/logout" method="POST">
+                <button type="submit" class="">Logout</button>
+            </form>
+          <% } else { %>
               <button class=""><a href="/user/login" class="">Login</a></button>
               <button class=""><a href="/user/signup" class="">Sign Up</a></button>
-            </div>
-    </div>
-</header> 
+          <% } %>
+      </div>
+  </div>
+</header>

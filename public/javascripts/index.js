@@ -13,3 +13,17 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   });
+
+  document.getElementById('bookTitle').addEventListener('change', async function() {
+    const bookId = this.value;
+    
+    // Fetch the book data
+    const response = await fetch(`/books/${bookId}/details`); // Assuming you have a route to fetch book details
+    const book = await response.json();
+
+    // Populate the author and cover fields
+    document.getElementById('author_and_cover').innerHTML = `
+        <p>Author: ${book.author}</p>
+        <img src="${book.coverImage}" alt="${book.title} cover">
+    `;
+});

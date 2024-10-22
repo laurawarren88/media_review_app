@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 import multer from 'multer';
 import Book from '../models/bookModel.js';
+import { ensureAdmin } from '../middleware/auth.js';
 
 const imageMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
 const upload = multer({
@@ -29,11 +30,11 @@ router.get('/', async (req, res) => {
 });
 
 // **** At the moment anyone can add a book but need to chnage this to only admin ****
-router.get('/new', async (req, res) => {
+router.get('/new', ensureAdmin, async (req, res) => {
     renderNewPage(res, new Book())
 });
 
-router.post('/', async (req, res) => { 
+router.post('/', ensureAdmin, async (req, res) => { 
     const { title, author, category, description } = req.body;
     const book = new Book({
         title: title,
@@ -101,7 +102,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', ensureAdmin, async (req, res) => {
     try {
         const book = await Book.findById(req.params.id)
         renderEditPage(res, book)
@@ -111,7 +112,7 @@ router.get('/:id/edit', async (req, res) => {
     
 });
 
-router.put('/:id', async (req,res) => {
+router.put('/:id', ensureAdmin, async (req,res) => {
     const { title, author, category, description, cover } = req.body;
     let book
 
@@ -135,7 +136,7 @@ router.put('/:id', async (req,res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', ensureAdmin, async (req, res) => {
     try {
         const book = await Book.findByIdAndDelete(req.params.id)
         if (!book) {

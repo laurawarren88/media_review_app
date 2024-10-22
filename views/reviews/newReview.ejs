@@ -1,7 +1,29 @@
-<h1 class="main_heading">Book Review</h1>
+<h1 class="main_heading">Add a Review</h1>
 
-<form action="/reviews" method="post">
-    <%- include('_form_fields') %>
-    <a href="/reviews">Cancel</a>
-    <button type="submit">Create</button>
-</form>
+<section class="new_review_container">
+    <div class="new_review_area">
+        <form action="/reviews" method="POST" class="new_review_form">
+            <!-- Prepopulated fields from Book -->
+            <label for="bookTitle">Book Title</label>
+            <select name="bookTitle" id="bookTitle" required>
+                <% books.forEach(function(book) { %>
+                    <option value="<%= book._id %>"><%= book.title %></option>
+                <% }) %>
+            </select>
+
+            <!-- Author and cover are automatically filled based on the selected book -->
+            <div id="author_and_cover"></div>
+
+            <label for="rating">Rating</label>
+            <input type="number" name="rating" min="1" max="5" required>
+
+            <label for="reviewText">Review</label>
+            <textarea name="reviewText" maxlength="500"></textarea>
+
+            <div class="form_actions">
+                <button type="submit" id="create">Submit Review</button>
+                <a href="/reviews">Cancel</a>
+            </div>
+        </form>
+    </div>
+</section>
