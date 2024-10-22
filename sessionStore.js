@@ -9,11 +9,9 @@ const setupSessionStore = () => {
         uri: process.env.DATABASE_URL,
         databaseName: 'media_review_app'
     });
-
     store.on('error', (error) => {
         console.error('Session store error:', error);
     });
-
     return store;
 };
 

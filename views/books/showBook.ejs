@@ -2,15 +2,11 @@
 
 <section class="book_card_container">
     <div class="book_card_area">
-  
-      <!-- Front of the card -->
       <div class="book_card_front">
         <img src="<%= book.coverImagePath %>" alt="<%= book.title %> cover">
         <p class="book_card_author"><%= book.author %></p>
         <p class ="book_card_category"><%= book.category %></p>
       </div>
-  
-      <!-- Back of the card -->
       <div class="book_card_back">
         <p><%= book.description %></p>
         <p>Average Rating: <%= book.averageRating %> / 5</p>

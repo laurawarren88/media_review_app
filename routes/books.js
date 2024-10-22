@@ -1,22 +1,12 @@
 import express from 'express';
 const router = express.Router();
-import multer from 'multer';
 import Book from '../models/bookModel.js';
 import { ensureAdmin } from '../middleware/auth.js';
 
-const imageMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
-const upload = multer({
-    limits: { fileSize: 10 * 1024 * 1024 } 
-});
-
-// Linking the review models for MongoDB collections 
-import Review from '../models/reviewModel.js';
- 
-// Render the home page with all books
 router.get('/', async (req, res) => {
     let searchOptions = {}
     if (req.query.title != null && req.query.title !== '') {
-        searchOptions.title = new RegExp(req.query.title, 'i') //The i feature returns the search query whether upper or lowercase
+        searchOptions.title = new RegExp(req.query.title, 'i') 
     }
     try {
         const books = await Book.find(searchOptions)
@@ -85,11 +75,6 @@ router.get('/advancedSearch', async (req, res) => {
         console.error(error);
         res.redirect('/books');
     }
-});
-
-// Displays categories for books
-router.get('/categories', (req, res) => {
-    res.render('books/categories', {title: "Media Review App"});
 });
 
 router.get('/:id', async (req, res) => {

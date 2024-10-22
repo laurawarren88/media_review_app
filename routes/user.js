@@ -1,7 +1,5 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
-
-// Linking the models for MongoDB collections
 import User from '../models/userModel.js'
 
 const router = express.Router();
@@ -39,7 +37,6 @@ router.post('/signup', async (req, res) => {
     }
 
     try {
-        // Check if user with the given email already exists
         const existingUser = await User.findOne({ $or: [{ email }, { username }] });
         
         if (existingUser) {
@@ -80,7 +77,6 @@ router.post('/login', async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (isMatch) {
-            // Passwords match, login successful and redirected to the home page
             req.session.user = {
                 _id: user._id,
                 username: user.username,
@@ -88,11 +84,9 @@ router.post('/login', async (req, res) => {
             };
             res.redirect(redirectTo); 
         } else {
-            // Passwords do not match
             return res.render('partials/errorMessage', { errorMessage: "Invalid password!" });
         }
     } catch (err) {
-        // Handle unexpected errors
         console.error("Error during login:", err);
         return res.render('partials/errorMessage', { errorMessage: "An unexpected error occurred during login!" });
     }

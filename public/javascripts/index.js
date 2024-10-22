@@ -1,4 +1,3 @@
-// Back button functionality to send a user back to the page they came from
 document.addEventListener('DOMContentLoaded', function() {
     const backButton = document.getElementById('back_button');
     if (backButton) {
@@ -6,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault(); 
   
         if (document.referrer) {
-          window.location.href = document.referrer; // Go to the previous page
+          window.location.href = document.referrer; 
         } else {
           window.location.href = '/'; 
         }
@@ -16,12 +15,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.getElementById('bookTitle').addEventListener('change', async function() {
     const bookId = this.value;
-    
-    // Fetch the book data
-    const response = await fetch(`/books/${bookId}/details`); // Assuming you have a route to fetch book details
+
+    const response = await fetch(`/books/${bookId}/details`); 
     const book = await response.json();
 
-    // Populate the author and cover fields
     document.getElementById('author_and_cover').innerHTML = `
         <p>Author: ${book.author}</p>
         <img src="${book.coverImage}" alt="${book.title} cover">

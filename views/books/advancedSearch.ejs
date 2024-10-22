@@ -9,15 +9,14 @@
         <input type="text" name="author" id="search" value="<%= searchOptions.author || '' %>" placeholder="Author">
         <p class="advanced_search_text">and/or</p>
         <input type="text" name="category" id="search" value="<%= searchOptions.category || '' %>" placeholder="Category">
-        <!-- <input type="text" name="averageRating" id="search" value="" placeholder="Rating" required> -->
         <button type="search" value="go" id="go">Search</button>
         <a href="javascript:void(0);" id="back_button" class="back_button"><< Back</a>
       </form>
   </div>
 </section>
 
-<% if (books.length > 0) { %> <!-- Only display if there are books -->
+<% if (books.length > 0) { %> 
 <%- include('../partials/bookCard') %>
-<% } else if (Object.keys(searchOptions).length > 0) { %> <!-- No books found, but search was performed -->
+<% } else if (Object.keys(searchOptions).length > 0) { %> 
   <p>No books found for the given search criteria.</p>
 <% } %>

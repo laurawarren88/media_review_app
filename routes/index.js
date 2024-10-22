@@ -12,7 +12,7 @@ const setupRoutes = (app) => {
     app.get('/', async (req, res) => {
         let searchOptions = {};
         if (req.query.title != null && req.query.title !== '') {
-            searchOptions.title = new RegExp(req.query.title, 'i'); // case insensitive
+            searchOptions.title = new RegExp(req.query.title, 'i'); 
         }
 
         try {
