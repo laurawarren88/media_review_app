@@ -140,7 +140,7 @@
 .search_form #go:focus,
 .advanced_search_form #go:hover,
 .advanced_search_form #go:focus {
-  background-color: var(--light-blue);
+  background-color: var(--blue);
 }
 
 .search_form #go:active,
@@ -155,7 +155,7 @@
 }
 
 .advanced_options {
-    color: var(--light-blue);
+    color: var(--blue);
     font-size: 1em;
     cursor: pointer;
 }
@@ -255,5 +255,5 @@
 
 .form_actions button:hover, .form_actions button:focus,
 .form_actions a:hover, .form_actions a:focus {
-    background-color: var(--light-blue);
+    background-color: var(--blue);
 }

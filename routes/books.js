@@ -19,7 +19,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// **** At the moment anyone can add a book but need to chnage this to only admin ****
 router.get('/new', ensureAdmin, async (req, res) => {
     renderNewPage(res, new Book())
 });
@@ -36,7 +35,7 @@ router.post('/', ensureAdmin, async (req, res) => {
 
     try{
         const newBook = await book.save();
-        res.redirect(`books/${newBook.id}`)
+        res.redirect('books')
     }   catch {
             renderNewPage(res, book, true)
         };

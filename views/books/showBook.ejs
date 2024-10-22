@@ -1,20 +1,22 @@
-<h2><%= book.title %></h2>
+<div>
+  <h2 class="view_book_title"><%= book.title %></h2>
+  <p class="view_book_author"><%= book.author %></p>
+  <p class ="view_book_category"><%= book.category %></p>
+</div>
 
-<section class="book_card_container">
-    <div class="book_card_area">
-      <div class="book_card_front">
-        <img src="<%= book.coverImagePath %>" alt="<%= book.title %> cover">
-        <p class="book_card_author"><%= book.author %></p>
-        <p class ="book_card_category"><%= book.category %></p>
-      </div>
-      <div class="book_card_back">
-        <p><%= book.description %></p>
-        <p>Average Rating: <%= book.averageRating %> / 5</p>
-        <button class="review_button"><a href="/reviews">Leave a review</a></button>
-        <a href="/books/<%= book.id %>">View</a>
-        <a href="/books/<%= book.id %>/edit">Edit</a>
-        <%- include('../partials/deleteForm', 
-                    { url: `/books/${book.id}`}) %>
-      </div>
-    </div>
-  </section>
+<div class="view_book_container">
+  <div class="view_book_buttons">
+    <% if (currentUser && currentUser.isAdmin) { %>
+      <button class="view_book_edit"><a href="/books/<%= book.id %>/edit">Edit</a></button>
+      <%- include('../partials/deleteForm', { url: `/books/${book.id}`}) %>
+    <% } %>
+  </div>
+  <img class="view_book_image" src="<%= book.coverImagePath %>" alt="<%= book.title %> cover">
+  <p class="view_book_description"><%= book.description %></p>
+  <p class="view_book_rating">Average Rating: <%= book.averageRating %> / 5</p>
+</div>
+
+<div class="view_book_review">
+  <button class="review_button"><a href="/reviews">Leave a review</a></button>
+</div>
+

@@ -25,7 +25,6 @@ body, html {
     --blue: rgb(44, 166, 247);
     --light-pink: rgb(246, 51, 148);
     --almost-black: rgb(3, 2, 21);
-    --light-blue: rgb(23, 209, 236); 
     --deep-orange: rgb(255, 190, 22);
 }
 
@@ -48,7 +47,7 @@ header {
     grid-template-columns: 0.05fr 0.25fr 1fr 0.5fr 0.25fr 0.05fr;
     grid-template-rows: auto;
     grid-template-areas: ". logo list auth social .";
-    background-color: var(--light-blue);
+    background-color: var(--blue);
     position: sticky;
     height: auto;
 }

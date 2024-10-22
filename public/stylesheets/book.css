@@ -1,0 +1,189 @@
+/** BOOK CARD **/
+.book_card_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 5em 2em 20em; 
+    perspective: 1000px; /* Needed for the 3D flip effect */
+}
+
+.book_card_area {
+    background-color: var(--blue);
+    width: 300px;
+    height: 450px;
+    margin: 1em;
+    display: inline-block;
+    position: relative;
+    border-radius: 0.5em;
+    transition: transform 0.6s ease-in-out;
+    transform-style: preserve-3d;
+    box-shadow: 2px 6px 12px var(--almost-black);
+}
+
+.book_card_area:hover {
+    transform: rotateY(180deg);
+}
+
+/* Front and back of the card */
+.book_card_front, .book_card_back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 0 0 5px 5px;
+}
+
+.book_card_front {
+    background-color: var(--blue);
+}
+
+.book_card_front img {
+    width: 100%;
+    height: 70%; 
+    object-fit: cover;
+}
+
+.book_card_title {
+    font-size: 1.25em;
+    text-align: center;
+    margin: 0.2em 0.15em;
+}
+
+.book_card_author, .book_card_category {
+    text-align: center;
+    font-size: 1em;
+    margin-top: 0.2em;
+}
+
+/* Back of card */
+.book_card_back {
+    background-color: var(--blue); 
+    color: var(--almost-black);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.25em;
+    font-size: 1.1em;
+}
+
+.book_card_back p {
+    text-align: justify;
+    margin-bottom: 1em;
+}
+
+.book_card_back .book_card_rating {
+    text-align: center;
+    margin-top: auto;
+}
+
+.book_card_back .book_card_rate {
+    display: flex;
+    justify-content: center;
+}
+
+.review_button {
+    display: grid;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--deep-orange);
+    border-radius: .5em;
+    height: 3em;
+    width: 10em;
+}
+
+.book_card_view {
+    margin: 1em;
+    background-color: var(--deep-pink);
+    border-radius: .75em;
+    border: black;
+    cursor: pointer;
+    height: 2em;
+    font-size: 1em;
+    text-align: center;
+    font-weight: 900;
+    width: 4em;
+    color: var(--deep-orange);
+}
+
+/** View Book Page **/
+.view_book_title {
+    text-align: center;
+    font-size: 2em;
+    margin-top: 1em;
+}
+
+.view_book_author, .view_book_category {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.view_book_category {
+    margin-bottom: 1em;
+}
+
+.view_book_container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: "buttons image desc .";
+}
+
+.view_book_buttons {
+    grid-area: buttons;
+    display: grid;
+    margin: auto;
+}
+
+.view_book_buttons button {
+    margin: 1em;
+    background-color: var(--blue);
+    border-radius: .75em;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+    height: 2.5em;
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: 900;
+    width: 7em;
+    color: var(--deep-orange);
+}
+
+.view_book_buttons a {
+    color: var(--deep-orange);
+}
+
+.view_book_buttons button:hover {
+    background-color: var(--deep-pink);
+}
+
+.view_book_container img {
+    grid-area: image;
+    height: 25em;
+    width: 15em;
+    margin: auto;
+}
+
+.view_book_description, .view_book_rating {
+    grid-area: desc;
+    display: grid;
+}
+
+.view_book_description {
+    align-items: center;
+    justify-content: center;
+}
+
+.view_book_rating {
+    align-items: end;
+    text-align: center;
+}
+
+.view_book_review {
+    margin: 3em;
+}
+
+
+
