@@ -9,10 +9,6 @@ router.get('/login', (req, res) => {
     res.render('user/login', {title: "Media Review App", layout: './layouts/auth'})
 });
 
-router.post('/login', (req, res) => {
-   
-})
-
 router.get('/signup', (req, res) => {
     res.render('user/signup', {title: "Media Review App", layout: './layouts/auth'})
 });
@@ -66,6 +62,43 @@ router.post('/signup', async (req, res) => {
     } catch (err) {
         console.error(err)
         res.redirect('signup')
+    }
+});
+
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    // Basic validation
+    if (username.trim() === '' || password.trim() === '') {
+        return res.render('partials/errorMessage', { errorMessage: "Empty input field!" });
+    }
+
+    try {
+        // Find the user by username
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            // User does not exist
+            return res.render('partials/errorMessage', { errorMessage: "Invalid credentials!" });
+        }
+
+        // Compare entered password with the hashed password
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (isMatch) {
+            // Passwords match, login successful
+            res.json({
+                status: "SUCCESS",
+                message: "Signin successful"
+            });
+        } else {
+            // Passwords do not match
+            return res.render('partials/errorMessage', { errorMessage: "Invalid password!" });
+        }
+    } catch (err) {
+        // Handle unexpected errors
+        console.error("Error during login:", err);
+        return res.render('partials/errorMessage', { errorMessage: "An unexpected error occurred during login!" });
     }
 });
 
