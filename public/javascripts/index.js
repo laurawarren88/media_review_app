@@ -12,15 +12,3 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   });
-
-  document.getElementById('bookTitle').addEventListener('change', async function() {
-    const bookId = this.value;
-
-    const response = await fetch(`/books/${bookId}/details`); 
-    const book = await response.json();
-
-    document.getElementById('author_and_cover').innerHTML = `
-        <p>Author: ${book.author}</p>
-        <img src="${book.coverImage}" alt="${book.title} cover">
-    `;
-});

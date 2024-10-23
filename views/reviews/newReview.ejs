@@ -2,22 +2,22 @@
 
 <section class="new_review_container">
     <div class="new_review_area">
-        <form action="/reviews" method="POST" class="new_review_form">
-            <div class="new_review_info">
-                <label for="bookTitle">Select the title of the book you want to review</label>
-                <select for="bookTitle" name="bookTitle" id="bookTitle" required>
-                    <% books.forEach(function(book) { %>
-                        <option value="<%= book._id %>"><%= book.title %></option>
-                    <% }) %>
-                </select>
-                <label for="rating">Rate the book out of 5</label>
-                <input type="number" name="rating" min="1" max="5" required>
-                <label for="reviewText">Write a short review of the book...no spoilers!</label>
-                <textarea name="reviewText" maxlength="250"></textarea>
-            </div>
-            <div id="new_review_cover">
-                <input type="file" name="cover" class="filepond" required>
-            </div>
+        <form action="/reviews/confirm" method="POST" class="new_review_form">
+            <!-- <form action="/reviews" method="POST" class="new_review_form"> -->
+                <img src="data:<%= book.coverImageType %>;base64,<%= book.coverImage.toString('base64') %>" alt="Book Cover">
+                <div class="new_review_info">
+                    <label for="bookTitle">Book Title</label>
+                    <input type="text" name="bookTitle" id="bookTitle" value="<%= book.title %>" readonly>
+
+                    <label for="bookAuthor">Author</label>
+                    <input type="text" name="bookAuthor" id="bookAuthor" value="<%= book.author %>" readonly>
+
+                    <label for="rating">Rate the book out of 5</label>
+                    <input type="number" name="rating" min="1" max="5" required>
+
+                    <label for="reviewText">Write a short review of the book...no spoilers!</label>
+                    <textarea name="reviewText" maxlength="250"></textarea>
+                </div>
             <div class="form_actions">
                 <button type="submit" id="create">Submit Review</button>
                 <a href="/reviews">Cancel</a>

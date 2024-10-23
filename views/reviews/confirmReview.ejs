@@ -1,0 +1,15 @@
+<h1 class="main_heading">Confirm your Review </h1>
+
+<section class="confirm_review_container">
+    <p>Please confirm you are giving <strong><%= bookTitle %></strong> <%= rating %> stars</p>
+    <p>and leaving the following review: <strong><%= reviewText ? reviewText : "No review text provided." %></strong></p>
+
+    <form action="/reviews" method="POST">
+        <input type="hidden" name="bookTitle" value="<%= bookTitle %>">
+        <input type="hidden" name="bookAuthor" value="<%= bookAuthor %>">
+        <input type="hidden" name="rating" value="<%= rating %>">
+        <input type="hidden" name="reviewText" value="<%= reviewText %>">
+        <button type="submit">Confirm Review</button>
+        <a href="javascript:history.back()">Go Back</a>
+    </form>
+</section>

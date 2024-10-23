@@ -1,7 +1,39 @@
 <h1 class="main_heading">Reviews</h1>
 
-<section class="search_container">
-  <div class="add_new_book">
-    <a class="add_new_book_link" href="/reviews/new">Add a review</a>
-  </div>
+<!-- <section class="search_container">
+    <div class="add_new_book">
+      <a class="add_new_book_link" href="/reviews/new">Add a review</a>
+    </div>
+</section> -->
+
+<section class="review_display_container">
+    <% if (reviews.length > 0) { %>
+        <% reviews.forEach(function(review) { %>
+            <div class="review_display_area">
+                <div class="review_display_card">
+                    <div class="review_display_card_image">
+                        <% if (review.bookTitle.coverImage) { %>
+                            <img src="<%= review.bookTitle.coverImage %>" alt="<%= review.bookTitle.title %> Cover Image">
+                        <% } %>
+                    </div>
+                    <div class="review_display_card_info">
+                        <h3 class="review_display_card_title"><%= review.bookTitle.title %></h3>
+                        <p class="review_display_card_author"><%= review.bookTitle.author %></p>
+                        <div class="review_display_card_rating">
+                            <% for (let i = 1; i <= 5; i++) { %>
+                                <% if (i <= review.rating) { %>
+                                    <i class="fas fa-star"></i>
+                                <% } else { %>
+                                    <i class="far fa-star empty"></i>
+                                <% } %>
+                            <% } %>
+                        </div>
+                        <p class="review_display_card_text"><%= review.reviewText %></p>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>No reviews available.</p>
+    <% } %>
 </section>

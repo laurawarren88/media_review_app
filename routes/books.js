@@ -78,13 +78,32 @@ router.get('/advancedSearch', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id)
-        res.render('books/showBook', {book: book})
+        const bookId = req.params.id; 
+        const book = await Book.findById(bookId);
+        if (book) {
+            res.render('books/showBook', {book: book})
+        } else {
+            res.render('partials/errorMessage', { errorMessage: 'No information for this book!' });
+        }
     } catch (err) {
         console.log(err)
         res.redirect('/')
     }
 });
+
+// allows the javascript to get the JSON information to display author and image
+// router.get('/:id', async (req, res) => {
+//     try {
+//         const book = await Book.findById(req.params.id).select('author coverImage coverImageType');
+//         if (!book) {
+//             return res.status(404).json({ message: 'Book not found' });
+//         }
+//         res.json(book);
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).json({ message: 'Server error' });
+//     }
+// });
 
 router.get('/:id/edit', ensureAdmin, async (req, res) => {
     try {

@@ -1,9 +1,9 @@
-/** ADD A NEW BOOK Form and Link **/
+/** ADD A NEW REVIEW Form **/
 .new_review_container {
     display: flex;
     justify-content: center;
     margin: 2em auto;
-    width: 80%;
+    width: 70%;
 }
 
 .new_review_area {
@@ -12,14 +12,22 @@
 
 .new_review_form {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1em;
     padding: 2em;
     box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
     border-radius: 1em;
 }
 
+.new_review_area img {
+    grid-column: 1;
+    height: 100%;
+    width: 75%;
+
+}
+
 .new_review_info {
+    grid-column: 2;
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -40,7 +48,7 @@
 }
 
 .new_review_info textarea {
-    height: 20em;
+    height: 10em;
 }
 
 .new_review_info input:focus, .new_review_info textarea:focus, #bookTitle {
@@ -49,6 +57,125 @@
     outline: 0;
 }
 
-.new_review_cover input[type="file"] {
+/** Display of reviews **/
+.review_display_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18em, 1fr)); 
+    grid-gap: 4em;
+    justify-content: center; 
+    margin-top: 5em;
+}
+
+.review_display_area {
+    display: flex;
+    flex-direction: column;
+}
+
+.review_display_card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    color: var(--black);
+    border-radius: 5px;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
     width: 100%;
+}
+
+.review_display_card_image img {
+    grid-column: 1;
+    width: 100%; 
+    height: 100%;
+}
+
+.review_display_card_info {
+    grid-column: 2;
+    margin: .5em;
+}
+
+.review_display_card_rating {
+    color: var(--orange); 
+    font-size: 1.2em; 
+    margin-bottom: 10px;
+}
+
+.review_display_card_rating .empty {
+    /* color: rgb(231, 224, 224);  */
+    color: transparent;
+}
+
+.review_display_card_text {
+    font-size: 1em; 
+    font-style: italic;
+}
+
+.review_display_card_title {
+    font-size: 1.5em; 
+    margin: 0; 
+}
+
+.review_display_card_author {
+    font-size: 1em; 
+    margin: 5px 0; 
+}
+
+/** Confirm Review **/
+.confirm_review_container {
+    display: grid;
+    justify-content: center;
+}
+
+.review_card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 2em;
+}
+
+.review_card_image {
+    grid-column: 1;
+}
+
+.review_card_info {
+    grid-column: 2;
+}
+
+.confirm_review_container p {
+    font-size: 2em;
+    margin-top: 1em;
+}
+
+.confirm_review_container form {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center;
+    padding: 3em;
+}
+
+.confirm_review_container button {
+    background-color: var(--pink);
+    padding: .5em;
+    margin: 1em;
+}
+
+.confirm_review_container button,
+.confirm_review_container a {
+    width: 25%;
+    border-radius: 0.75em;
+    color: var(--orange);
+    cursor: pointer;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    font-size: 1em;
+    font-weight: 900;
+}
+
+.confirm_review_container a {
+    background-color: var(--blue);
+    padding: .5em;
+}
+
+.confirm_review_container button:hover, .confirm_review_container button:focus {
+    background-color: var(--blue);
+}
+
+.confirm_review_container a:hover, .confirm_review_container a:focus {
+    background-color: var(--black);
 }
