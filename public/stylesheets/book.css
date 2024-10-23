@@ -17,7 +17,7 @@
     border-radius: 0.5em;
     transition: transform 0.6s ease-in-out;
     transform-style: preserve-3d;
-    box-shadow: 2px 6px 12px var(--almost-black);
+    box-shadow: 2px 6px 12px var(--black);
 }
 
 .book_card_area:hover {
@@ -60,7 +60,7 @@
 /* Back of card */
 .book_card_back {
     background-color: var(--blue); 
-    color: var(--almost-black);
+    color: var(--black);
     transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
@@ -89,24 +89,60 @@
     margin: auto;
     justify-content: center;
     align-items: center;
-    background-color: var(--deep-orange);
+    background-color: var(--orange);
     border-radius: .5em;
     height: 3em;
     width: 10em;
 }
 
 .book_card_view {
-    margin: 1em;
-    background-color: var(--deep-pink);
+    display: grid;
+    margin: auto;
+}
+
+.book_card_view, .book_card_edit {
+    background-color: var(--pink);
+    width: 50%;
+}
+
+.book_card_view a, .book_card_edit a {
+    color: var(--orange);
+}
+
+.book_card_view, .book_card_edit, .book_card_delete button {
     border-radius: .75em;
-    border: black;
-    cursor: pointer;
-    height: 2em;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    font-weight: 900;
     font-size: 1em;
     text-align: center;
-    font-weight: 900;
-    width: 4em;
-    color: var(--deep-orange);
+    cursor: pointer;
+    padding: .25em;
+}
+
+.edit_delete {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%;
+}
+
+.book_card_delete {
+    margin: .5em;
+}
+
+.book_card_delete button {
+    background-color: var(--black);
+    color: var(--orange);
+    width: 100%;
+}
+
+.book_card_view:hover, .book_card_view:focus, 
+.book_card_edit:hover, .book_card_edit:focus {
+    background-color: var(--blue);
+}
+
+.book_card_delete button:hover, .book_card_delete button:focus {
+    background-color: red;
 }
 
 /** View Book Page **/
@@ -148,15 +184,15 @@
     text-align: center;
     font-weight: 900;
     width: 7em;
-    color: var(--deep-orange);
+    color: var(--orange);
 }
 
 .view_book_buttons a {
-    color: var(--deep-orange);
+    color: var(--orange);
 }
 
 .view_book_buttons button:hover {
-    background-color: var(--deep-pink);
+    background-color: var(--pink);
 }
 
 .view_book_container img {

@@ -41,8 +41,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-    res.locals.currentUser = req.session.user || null; 
-    res.locals.isLoggedIn = !!req.session.user; 
+    res.locals.isLoggedIn = req.session && req.session.user ? true : false;
+    res.locals.currentUser = req.session ? req.session.user : null;
     next();
 });
 

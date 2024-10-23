@@ -23,7 +23,7 @@
     background-color: var(--blue);
     border-radius: .75em;
     box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
-    color: var(--deep-orange);
+    color: var(--orange);
     cursor: pointer;
     height: 2.5em;
     font-size: 1.5em;
@@ -93,7 +93,7 @@
 
 .search_form #search,
 .advanced_search_form #search {
-    border: 1px solid var(--almost-black);
+    border: 1px solid var(--black);
     box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
     border-radius: 3px;
     color: var(--blue);
@@ -120,10 +120,10 @@
 
 .search_form #go,
 .advanced_search_form #go {
-    background-color: var(--light-pink);
+    background-color: var(--pink);
     border-radius: .75em;
     box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
-    color: var(--deep-orange);
+    color: var(--orange);
     cursor: pointer;
     height: 2em;
     font-size: 1em;
@@ -161,7 +161,7 @@
 }
 
 .advanced_options:hover {
-    color: var(--deep-orange);
+    color: var(--orange);
 }
 
 .advanced_search_text {
@@ -199,7 +199,7 @@
 .new_book_info input, .new_book_info textarea {
     width: 100%;
     padding: 0.75em;
-    border: 1px solid var(--almost-black);
+    border: 1px solid var(--black);
     color: var(--blue);
     border-radius: 3px;
     box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
@@ -229,7 +229,7 @@
 }
 
 .form_actions button {
-    background-color: var(--light-pink);
+    background-color: var(--pink);
     width: 25%;
 }
 
@@ -240,7 +240,7 @@
     align-items: center; 
     text-align: center;
     border-radius: 0.75em;
-    color: var(--deep-orange);
+    color: var(--orange);
     cursor: pointer;
     box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
     height: 2.5em;

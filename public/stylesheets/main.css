@@ -1,3 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.5; 
+    list-style: none; 
+    text-decoration: none;
+    font-family: "Quicksand", sans-serif;
+}
+
+body, html {
+    height: 100%;
+}
+
+.main_heading {
+    text-align: center;
+    max-width: auto;
+    padding-top: .5em;
+    font-size: 5em;
+    color: var(--black);
+}
+
+:root {
+    --blue: rgb(44, 166, 247);
+    --pink: rgb(253, 5, 129);
+    --black: rgb(3, 2, 21);
+    --orange: rgb(255, 190, 22);
+}
+
+/* Sets the container for the whole webpage so it is all aligned */
+.body_container {
+    max-width: 1500px;
+    margin: auto;
+    margin-bottom: 3rem;
+}
+
+/* navbar */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
+    grid-template-rows: auto;
+    grid-template-areas: "logo list auth social";
+    background-color: var(--blue);
+    position: sticky;
+    /* height: auto; */
+}
+
+#logo{
+    grid-area: logo;
+    height: 6.5em;
+}
+
+.logo_image {
+    display: grid;
+    margin: auto;
+    width:75%;
+    max-height: 100%;
+}
+
+#primary{
+    grid-area: list;
+    display: grid;
+}
+
+nav#primary ul {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+nav#primary li {
+    margin-left: 3em;
+}
+
+nav#primary li a {
+    text-decoration: none;
+    font-size: 2em;
+    transition: color .2s;
+    color: var(--orange);
+}
+
+nav#primary li a:hover {
+    color: var(--pink);
+}
+
+.auth{
+    grid-area: auth;
+    display: inline-flex;
+    align-items: center;
+    justify-self: center;
+}
+
+.welcome_message {
+    color: var(--pink);
+    font-size: 2em;
+    margin-right: 1em;
+    text-transform: capitalize;
+}
+
+.auth a{
+    text-decoration: none;
+    color: var(--orange);
+}
+
+.auth button {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-color: var(--pink);
+    width: 100%;
+    padding: 1em;
+    text-align: center;
+    border-radius: 0.75em;
+    color: var(--orange);
+    cursor: pointer;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    height: 2.5em;
+    font-size: 1em;
+    font-weight: 900;
+    margin: 1em;
+}
+
+.auth button:hover, .auth button:focus {
+    background-color: var(--blue);
+}
+
+.social {
+    grid-area: social;
+    display: inline-flex;
+    align-items: center;
+    justify-self: center;
+}
+
+.facebook img, .instagram img{
+    height: 3em;
+    width: 3em;
+}
+
+.facebook img {
+    margin-right: 1em;
+}
+
+/** Error Message **/
+.error_message {
+    margin: 3em;
+    font-size: 3em;
+}
+
+/** footer **/
+footer {
+    background-color: var(--black);
+    opacity: 0.5;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+footer p{
+    padding: .5em;
+    color: white;
+    text-align: right;
+
+}
+
 /** HOME PAGE **/
 .cta {
     background: url('/Images/cta.jpg');
@@ -15,8 +186,7 @@
     top: 30%;
     text-align: center;
     left: 30%;
-    /* border: 5px solid red; */
-    color: var(--light-pink);
+    color: var(--pink);
     font-size: 5em;
 }
 

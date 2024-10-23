@@ -1,5 +1,5 @@
 export function ensureAuthenticated(req, res, next) {
-    if (req.session && req.session.userId) { 
+    if (req.session && req.session.user) { 
         return next();
     } else {
         req.session.returnTo = req.originalUrl;

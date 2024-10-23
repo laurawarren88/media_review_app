@@ -16,13 +16,13 @@
             </div>    
       <div class="auth">
           <% if (isLoggedIn) { %> 
-              <span>Welcome, <%= currentUser.username %>!</span>
+              <span class="welcome_message">Welcome, <%= currentUser.username %>!</span>
               <form action="/user/logout" method="POST">
                 <button type="submit" class="">Logout</button>
             </form>
           <% } else { %>
               <button class=""><a href="/user/login" class="">Login</a></button>
-              <button class=""><a href="/user/signup" class="">Sign Up</a></button>
+              <button class=""><a href="/user/signup" class="">Register</a></button>
           <% } %>
       </div>
   </div>

@@ -1,0 +1,54 @@
+/** ADD A NEW BOOK Form and Link **/
+.new_review_container {
+    display: flex;
+    justify-content: center;
+    margin: 2em auto;
+    width: 80%;
+}
+
+.new_review_area {
+    width: 100%;
+}
+
+.new_review_form {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1em;
+    padding: 2em;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    border-radius: 1em;
+}
+
+.new_review_info {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+#bookTitle {
+    background-color: #fff;
+}
+
+.new_review_info input, .new_review_info textarea, #bookTitle {
+    width: 100%;
+    padding: 0.75em;
+    border: 1px solid var(--black);
+    color: var(--blue);
+    border-radius: 3px;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    font-size: 1.25em;
+}
+
+.new_review_info textarea {
+    height: 20em;
+}
+
+.new_review_info input:focus, .new_review_info textarea:focus, #bookTitle {
+    border-color: #aaa;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.75);
+    outline: 0;
+}
+
+.new_review_cover input[type="file"] {
+    width: 100%;
+}

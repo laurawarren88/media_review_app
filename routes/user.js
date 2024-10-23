@@ -82,6 +82,8 @@ router.post('/login', async (req, res) => {
                 username: user.username,
                 isAdmin: user.isAdmin 
             };
+            const redirectTo = req.session.returnTo || '/';
+            delete req.session.returnTo; 
             res.redirect(redirectTo); 
         } else {
             return res.render('partials/errorMessage', { errorMessage: "Invalid password!" });

@@ -21,7 +21,7 @@ const reviewSchema = new mongoose.Schema({
     reviewText: { 
         type: String, 
         required: true,
-        maxlength: 500
+        maxlength: 250
     }
 });
 
