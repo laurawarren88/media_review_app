@@ -23,7 +23,8 @@ router.get('/', async (req, res) => {
             return {
                 ...review,
                 bookTitle: {
-                    ...book,
+                    // ...book,
+                    ...(book || { title: 'Unknown', author: 'Unknown', coverImage: null }),
                     coverImage: coverImage ? `data:${coverImageType};base64,${coverImage.toString('base64')}` : null
                 }
             };
@@ -43,62 +44,45 @@ router.get('/', async (req, res) => {
     }
 });
 
-// router.get('/new', ensureAuthenticated, async (req, res) => {
-//     try {
-//         const bookId = req.query.bookId;
-//         const book = await Book.findById(bookId); 
-
-//         if (!book) {
-//             return res.render('partials/errorMessage', { errorMessage: 'Book not found' });
-//         }
-
-//         const books = await Book.find();
-
-//         res.render('reviews/newReview', { 
-//             title: "Media Review App",
-//             books, 
-//             currentUser: req.session.user 
-//         });
-//     } catch (err) {
-//         console.error(err);
-//         res.render('partials/errorMessage', { errorMessage: 'Failed to load books for review' });
-//     }
-// });
-
 router.get('/new', ensureAuthenticated, async (req, res) => {
+    const bookId = req.query.bookId;
+    
     try {
-        const bookId = req.query.bookId; // Get bookId from query string
-        const book = await Book.findById(bookId); // Find the book
-
-        if (!book) {
-            return res.render('partials/errorMessage', { errorMessage: 'Book not found' });
+        let books;
+        let book = null;
+        
+        if (bookId) {
+            book = await Book.findById(bookId); 
+        } else {
+            books = await Book.find(); 
         }
 
-        // Fetch all books for the dropdown
-        const books = await Book.find(); // Adjust this based on your requirement
-
-        // Render the review form with the selected book
         res.render('reviews/newReview', { 
             title: "Media Review App", 
-            book, // Pass the selected book details
-            books, // Pass the books array for the dropdown
+            book, 
+            books, 
             currentUser: req.session.user 
         });
     } catch (err) {
         console.error(err);
-        res.render('partials/errorMessage', { errorMessage: 'Failed to load books for review' });
+        res.render('partials/errorMessage', { errorMessage: 'Failed to load the review form' });
     }
 });
 
 router.post('/', ensureAuthenticated, async (req, res) => {
-    const { bookTitle, bookAuthor, rating, reviewText } = req.body;
+    console.log('Received form data:', req.body); 
+
+    const { bookId, bookTitle, bookAuthor, rating, reviewText } = req.body;
+
+    console.log("Received bookId:", bookId); 
 
     if (!req.session || !req.session.user) {
         return res.render('partials/errorMessage', { errorMessage: 'You must be logged in to leave a review' });
     }
     try {
-        const book = await Book.findById(bookTitle, bookAuthor);
+        const book = await Book.findById(bookId);
         if (!book) {
+            console.log("Book not found with ID:", bookId);
             return res.render('partials/errorMessage', { errorMessage: 'Book not found' });
         }
 
@@ -107,7 +91,7 @@ router.post('/', ensureAuthenticated, async (req, res) => {
             bookAuthor: book.author,
             username: req.session.user.username,
             rating: parseInt(rating),
-            reviewText: reviewText ? reviewText.trim() : ''  
+            reviewText: reviewText && reviewText.trim() !== '' ? reviewText.trim() : null   
         });
 
         await review.save();
@@ -119,8 +103,21 @@ router.post('/', ensureAuthenticated, async (req, res) => {
 });
 
 router.post('/confirm', ensureAuthenticated, (req, res) => {
-    const { bookTitle, bookAuthor, rating, reviewText } = req.body;
-    res.render('reviews/confirmReview', { bookTitle, bookAuthor, rating, reviewText });
+    const { bookId, bookTitle, bookAuthor,rating, reviewText } = req.body;  // Add bookId
+    res.render('reviews/confirmReview', { bookTitle, bookAuthor, bookId, rating, reviewText });
+});
+
+router.get('/reviews/new/:id', ensureAuthenticated, async (req, res) => {
+    try {
+        const book = await Book.findById(req.params.id);
+        if (!book) {
+            return res.render('partials/errorMessage', { errorMessage: 'Book not found' });
+        }
+        res.render('reviews/new', { book }); // Pass the book object to the template
+    } catch (err) {
+        console.error(err);
+        res.render('partials/errorMessage', { errorMessage: 'Failed to load book' });
+    }
 });
 
 export default router;

@@ -4,14 +4,30 @@
     <div class="new_review_area">
         <form action="/reviews/confirm" method="POST" class="new_review_form">
             <!-- <form action="/reviews" method="POST" class="new_review_form"> -->
+                <% if (book) { %>
+                <input type="hidden" name="bookId" id="bookId" value="<%= book._id %>">
                 <img src="data:<%= book.coverImageType %>;base64,<%= book.coverImage.toString('base64') %>" alt="Book Cover">
                 <div class="new_review_info">
+                   
                     <label for="bookTitle">Book Title</label>
                     <input type="text" name="bookTitle" id="bookTitle" value="<%= book.title %>" readonly>
 
                     <label for="bookAuthor">Author</label>
                     <input type="text" name="bookAuthor" id="bookAuthor" value="<%= book.author %>" readonly>
 
+                    <% } else { %>
+                    <div class="new_review_info">
+                        <label for="bookTitle">Select Book</label>
+                        <select name="bookTitle" id="bookTitle" required>
+                            <option value="">Select a book</option>
+                            <% books.forEach(function(book) { %>
+                                <option value="<%= book._id %>"><%= book.title %></option>
+                            <% }) %>
+                        </select>
+    
+                        <label for="bookAuthor">Author</label>
+                        <input type="text" name="bookAuthor" id="bookAuthor" readonly>
+                    <% } %>
                     <label for="rating">Rate the book out of 5</label>
                     <input type="number" name="rating" min="1" max="5" required>
 
@@ -25,3 +41,12 @@
         </form>
     </div>
 </section>
+
+<script>
+    document.getElementById('bookTitle').addEventListener('change', function() {
+        const selectedBookId = this.value;
+        const selectedBook = <%- JSON.stringify(books) %>.find(book => book._id === selectedBookId);
+        document.getElementById('bookAuthor').value = selectedBook ? selectedBook.author : '';
+        document.getElementById('bookId').value = selectedBook ? selectedBook._id : '';
+    });
+</script>

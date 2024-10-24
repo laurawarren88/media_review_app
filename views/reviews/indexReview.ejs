@@ -12,13 +12,20 @@
             <div class="review_display_area">
                 <div class="review_display_card">
                     <div class="review_display_card_image">
-                        <% if (review.bookTitle.coverImage) { %>
+                        <% if (review.bookTitle && review.bookTitle.coverImage) { %>
                             <img src="<%= review.bookTitle.coverImage %>" alt="<%= review.bookTitle.title %> Cover Image">
+                        <% } else { %>
+                            <img src="/path/to/default-image.png" alt="Default Cover Image">
                         <% } %>
                     </div>
                     <div class="review_display_card_info">
-                        <h3 class="review_display_card_title"><%= review.bookTitle.title %></h3>
-                        <p class="review_display_card_author"><%= review.bookTitle.author %></p>
+                        <% if (review.bookTitle) { %>
+                            <h3 class="review_display_card_title"><%= review.bookTitle.title %></h3>
+                            <p class="review_display_card_author"><%= review.bookTitle.author %></p>
+                        <% } else { %>
+                            <h3 class="review_display_card_title">Book Not Available</h3>
+                            <p class="review_display_card_author">This book has been removed.</p>
+                        <% } %>
                         <div class="review_display_card_rating">
                             <% for (let i = 1; i <= 5; i++) { %>
                                 <% if (i <= review.rating) { %>

@@ -257,3 +257,9 @@
 .form_actions a:hover, .form_actions a:focus {
     background-color: var(--blue);
 }
+
+
+/** Edit form **/
+.edit_book_cover img {
+    width: 100%;
+}

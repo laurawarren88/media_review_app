@@ -5,6 +5,7 @@
     <p>and leaving the following review: <strong><%= reviewText ? reviewText : "No review text provided." %></strong></p>
 
     <form action="/reviews" method="POST">
+        <input type="hidden" name="bookId" value="<%= bookId %>">
         <input type="hidden" name="bookTitle" value="<%= bookTitle %>">
         <input type="hidden" name="bookAuthor" value="<%= bookAuthor %>">
         <input type="hidden" name="rating" value="<%= rating %>">

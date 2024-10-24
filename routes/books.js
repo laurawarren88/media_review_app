@@ -1,6 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import Book from '../models/bookModel.js';
+import Review from '../models/reviewModel.js';
 import { ensureAdmin } from '../middleware/auth.js';
 
 router.get('/', async (req, res) => {
@@ -91,20 +92,6 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// allows the javascript to get the JSON information to display author and image
-// router.get('/:id', async (req, res) => {
-//     try {
-//         const book = await Book.findById(req.params.id).select('author coverImage coverImageType');
-//         if (!book) {
-//             return res.status(404).json({ message: 'Book not found' });
-//         }
-//         res.json(book);
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).json({ message: 'Server error' });
-//     }
-// });
-
 router.get('/:id/edit', ensureAdmin, async (req, res) => {
     try {
         const book = await Book.findById(req.params.id)
@@ -115,40 +102,50 @@ router.get('/:id/edit', ensureAdmin, async (req, res) => {
     
 });
 
-router.put('/:id', ensureAdmin, async (req,res) => {
+router.put('/:id', ensureAdmin, async (req, res) => {
     const { title, author, category, description, cover } = req.body;
-    let book
+    let book;
 
     try {
-        book = await Book.findById(req.params.id)
-        book.title = title,
-        book.author = author,
-        book.category = category,
-        book.description = description
-        if (cover != null && cover !== '') {
-            saveCover(book, cover);
+        book = await Book.findById(req.params.id);
+        book.title = title;
+        book.author = author;
+        book.category = category;
+        book.description = description;
+
+        // Save cover if provided
+        if (cover && cover !== '') {
+            await saveCover(book, cover);
         }
-        await book.save()
-        res.redirect(`/books/${book.id}`)
-    } catch {
+
+        await book.save();
+        res.redirect(`/books/${book.id}`);
+    } catch (err) {
+        console.error(err);
         if (book != null) {
-            renderEditPage(res, book, true)
+            renderEditPage(res, book, true);
         } else {
-            redirect('/')
+            res.redirect('/');
         }
     }
 });
 
 router.delete('/:id', ensureAdmin, async (req, res) => {
+    const { id } = req.params;
     try {
-        const book = await Book.findByIdAndDelete(req.params.id)
-        if (!book) {
-            return res.redirect('/');
+        await Review.deleteMany({ bookTitle: id }); 
+    
+        const deletedBook = await Book.findByIdAndDelete(id);
+        
+        if (!deletedBook) {
+            console.log(`No book found with ID: ${id}`);
+            return res.redirect('/'); 
         }
-        await book.remove();
-        res.redirect('/');
-    } catch {
-        res.redirect('/books')
+
+        res.redirect('/'); 
+    } catch (err) {
+        console.error(`Error deleting book with ID: ${id}`, err);
+        res.redirect('/books'); 
     }
 });
 
@@ -160,25 +157,48 @@ async function renderNewPage(res, book, hasError = false) {
     renderFormPage(res, book, 'editBook', hasError)
   };
 
-//Function to link back to the new books page
-async function renderFormPage(res, book, form, hasError = false) {
-    try {
-        const params = {
-            title: "Media Review App",
-            book: book
+  async function renderFormPage(res, book, form, hasError = false) {
+    // Format cover image for rendering
+    const formattedCoverImage = book.coverImage ? 
+        `data:${book.coverImageType};base64,${book.coverImage.toString('base64')}` : null;
+
+    // Pass the formatted cover image to the template
+    const params = {
+        title: "Media Review App",
+        book: {
+            ...book.toObject(),
+            coverImage: formattedCoverImage // Include the formatted image here
         }
-        if (hasError) {
-            if (form === 'edit') {
-              params.errorMessage = 'Error Updating Book'
-            } else {
-              params.errorMessage = 'Error Creating Book'
-            }
-          }
-          res.render(`books/${form}`, params)
-    } catch {
-        res.redirect(`/books`)
-    }
+    };
+    if (hasError) {
+        if (form === 'edit') {
+          params.errorMessage = 'Error Updating Book'
+        } else {
+          params.errorMessage = 'Error Creating Book'
+        }
+      }
+    res.render(`books/${form}`, params)
 };
+
+//Function to link back to the new books page
+// async function renderFormPage(res, book, form, hasError = false) {
+//     try {
+//         const params = {
+//             title: "Media Review App",
+//             book: book
+//         }
+//         if (hasError) {
+//             if (form === 'edit') {
+//               params.errorMessage = 'Error Updating Book'
+//             } else {
+//               params.errorMessage = 'Error Creating Book'
+//             }
+//           }
+//           res.render(`books/${form}`, params)
+//     } catch {
+//         res.redirect(`/books`)
+//     }
+// };
 
 function saveCover(book, coverEncoded) {
     if (coverEncoded == null) return;
