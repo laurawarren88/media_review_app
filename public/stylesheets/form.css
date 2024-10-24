@@ -169,7 +169,7 @@
     font-size: 1.5em;
 }
 
-/** ADD A NEW BOOK Form and Link **/
+/** ADD A NEW BOOK Form **/
 .new_book_container {
     display: flex;
     justify-content: center;
@@ -258,8 +258,50 @@
     background-color: var(--blue);
 }
 
-
 /** Edit form **/
 .edit_book_cover img {
     width: 100%;
+}
+
+ /* Extra small devices (phones, 600px and down) */
+ @media only screen and (max-width: 600px) {
+    .search_container { display: grid; grid-template-columns: 1fr; grid-template-areas: "new" "search"; justify-content: center;}
+    .add_new_book_link { grid-area: new; }
+    .search_area { grid-area: search; margin: auto; width: 80%; }
+    /** ADD A NEW BOOK Form **/
+    .new_book_form { display: grid; grid-template-columns: 2fr; grid-template-areas: "cover" "info"; }
+    .new_book_info { grid-area: info; }
+    .new_book_cover input { grid-area: cover; }
+    .form_actions a { width: 20%; }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 767px) and (min-width: 600px) {
+    .search_container { display: grid; grid-template-columns: 1fr; grid-template-areas: "new" "search"; justify-content: center;}
+    .add_new_book_link { grid-area: new; }
+    .search_area { grid-area: search; margin: auto; width: 80%; }
+    /** ADD A NEW BOOK Form **/
+    .new_book_form { display: grid; grid-template-columns: 2fr; grid-template-areas: "cover" "info"; }
+    .new_book_info { grid-area: info; }
+    .new_book_cover input { grid-area: cover; }
+    .form_actions a { width: 20%; }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 1013px) and (min-width: 768px) {
+    .search_container { display: grid; grid-template-columns: 1fr; grid-template-areas: "new" "search"; justify-content: center;}
+    .add_new_book_link { grid-area: new; }
+    .search_area { grid-area: search; margin: auto; width: 80%; }
+     /** ADD A NEW BOOK Form **/
+     .new_book_form { display: grid; grid-template-columns: 2fr; grid-template-areas: "cover" "info"; }
+     .new_book_info { grid-area: info; }
+     .new_book_cover input { grid-area: cover; }
+     .form_actions a { width: 20%; }
+}
+
+/* Large devices (laptops/desktops, 1014px and up) */
+@media only screen and (max-width: 1200px) and (min-width: 1014px) {
+    .search_container { margin: auto; }
+    .add_new_book_link { width: 10em; }
+    .search_area { margin: auto;  width: 80%; margin-bottom: 2em; } 
 }

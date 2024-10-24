@@ -23,7 +23,6 @@
     grid-column: 1;
     height: 100%;
     width: 75%;
-
 }
 
 .new_review_info {
@@ -98,7 +97,6 @@
 }
 
 .review_display_card_rating .empty {
-    /* color: rgb(231, 224, 224);  */
     color: transparent;
 }
 
@@ -179,3 +177,46 @@
 .confirm_review_container a:hover, .confirm_review_container a:focus {
     background-color: var(--black);
 }
+
+ /* Extra small devices (phones, 600px and down) */
+ @media only screen and (max-width: 600px) {
+    /** ADD A NEW REVIEW Form **/
+    .new_review_form { grid-template-columns: 1fr; grid-template-areas: "cover" "info"; }
+    .new_review_area img { grid-area: cover; width: 100%; }
+    .new_review_info { grid-area: info; }
+    /** Display of reviews **/
+    .review_display_container { grid-template-columns: 1fr; margin: 1em; }
+    .review_display_card { width: 50%; margin: auto; }
+    /** Confirm Review **/
+    .confirm_review_container p { font-size: 1.5em; text-align: center; margin-top: .75em; }
+    }
+
+ /* Small devices (portrait tablets and large phones, 600px and up) */
+ @media only screen and (max-width: 767px) and (min-width: 600px) {
+    /** ADD A NEW REVIEW Form **/
+    .new_review_form { grid-template-columns: 1fr; grid-template-areas: "cover" "info"; }
+    .new_review_area img { grid-area: cover; width: 100%; }
+    .new_review_info { grid-area: info; }
+    /** Display of reviews **/
+    .review_display_container { grid-template-columns: 1fr; margin: 1em; }
+    .review_display_card { width: 70%; margin: auto; }
+    /** Confirm Review **/
+    .confirm_review_container p { font-size: 1.5em; text-align: center; margin-top: .75em; }
+ }
+ 
+ /* Medium devices (landscape tablets, 768px and up) */
+ @media only screen and (max-width: 1014px) and (min-width: 768px) {
+     /** ADD A NEW REVIEW Form **/
+     .new_review_container { width: 85%; }
+     .new_review_area img { width: 100%; }
+    /** Display of reviews **/
+    .review_display_container { grid-template-columns: 1fr 1fr; margin: 1em; }
+    .review_display_card { width: 85%; margin: auto; }
+ }
+ 
+ /* Large devices (laptops/desktops, 1014px and up) */
+ @media only screen and (max-width: 1200px) and (min-width: 1014px) {
+    /** ADD A NEW REVIEW Form **/
+    .new_review_container { width: 85%; }
+    .new_review_area img { width: 90%; }
+ }

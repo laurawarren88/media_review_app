@@ -1,12 +1,4 @@
 /**** AUTHENTICATION PAGES - Login, Register, Forgot Password ****/
-.alert {
-    font-size: 3em;
-    margin: 1em;
-    font-style: italic;
-    font-weight: 900;
-    letter-spacing: .25em;
-}
-
 .login_main_body {
     background: linear-gradient(217deg, var(--pink), var(--blue), var(--orange));
     background-repeat: no-repeat;
@@ -19,10 +11,6 @@
     border-radius: 2.5em;
     padding: 0.5em;
     margin: 3em;
-}
-
-.login_card {
-    width: 30%;
 }
 
 .forgot_card {
@@ -90,3 +78,51 @@
     text-decoration: underline;
     margin: 1em;
 }
+
+ /* Extra small devices (phones, 600px and down) */
+ @media only screen and (max-width: 600px) {
+    .login_card, .forgot_card { border-radius: .75em; width: 50%; margin: 0; top: 50%}
+    .login_card { height:30em; overflow:scroll; overflow-x:hidden; }
+    .auth_heading { padding-top: .5em; font-size: 2.5em;}
+    .login_card label { font-size: 1.25em; }
+    #username, #password, #email, #confirm_password { width: 80%;}
+    .no_account, .forgot{ font-size: .5em; }
+    #submit { width: 50%; font-size: 1em;}
+    #reset { width: 75%; font-size: 1.25em;}
+    #home_link { font-size: 0.75em; }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .login_card, .forgot_card { border-radius: .75em; width: 50%; margin: 0; top: 50%}
+    #username, #password, #email, #confirm_password { width: 80%;}
+    .no_account, .forgot{ font-size: .6em; }
+    #submit { width: 50%;}
+    #reset { width: 75%; font-size: 1.25em;}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .login_card { border-radius: 1.5em; width: 60%; margin: 0; top: 50%}
+    .auth_heading { padding-top: .5em; font-size: 2.5em;}
+    .no_account, .forgot{ font-size: .75em; }
+    #submit { width: 50%;}
+    #home_link { font-size: 1em; }
+}
+
+/* Large devices (laptops/desktops, 1014px and up) */
+@media only screen and (min-width: 1014px) {
+    .login_card, .forgot_card { border-radius: 2.5em; width: 75%; margin: 0; top: 50%}
+    .auth_heading { padding-top: 1em; font-size: 3em;}
+    #username, #password, #email, #confirm_password { padding: .5em; margin: .5em; }
+    .no_account, .forgot{ font-size: 1em; }
+    #submit { width: 50%;}
+    #reset { width: 50%; font-size: 2em;}
+    #home_link { font-size: 1em; }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .login_card { width: 40%; }
+    #username, #password, #email, #confirm_password { width: 65%;}
+} 

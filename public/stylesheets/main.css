@@ -153,6 +153,14 @@ nav#primary li a:hover {
     font-size: 3em;
 }
 
+.alert {
+    font-size: 3em;
+    margin: 1em;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: .25em;
+}
+
 /** footer **/
 footer {
     background-color: var(--black);
@@ -190,50 +198,27 @@ footer p{
     font-size: 5em;
 }
 
-/* Rating feature */
-/* .book_card_rating {
-    text-align: center;
+ /* Extra small devices (phones, 600px and down) */
+ @media only screen and (max-width: 600px) {
+    .main_heading { padding-top: .25em; font-size: 3em;}
+    .error_message { margin: 1em; font-size: 2em; text-align: center;}
+    .alert { font-size: 1.5em; margin: .5em; font-weight: 700; text-align: center; }
+    footer { display: none; }
 }
 
-.book_card_rate {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 3em;
-    flex-direction: row-reverse;
-} */
-
-/* .book_card_rate input {
-    display: none;
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .error_message { margin: 1em; text-align: center;}
+    .alert { font-size: 1.5em; margin: .5em; font-weight: 900; text-align: center; }
 }
 
-.book_card_rate label {
-    float: left;
-    width: 1em;
-    overflow: hidden;
-    white-space: nowrap;
-    cursor: pointer;
-    font-size: 2em;
-    color:#fff;
-    transition: color 0.2s ease-in-out;
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {...}
+
+/* Large devices (laptops/desktops, 1014px and up) */
+@media only screen and (min-width: 1014px) {
+
 }
 
-.book_card_rate label:before {
-    content: '★';
-}
-
-.book_card_rate input:checked {
-    color: var(--deep-pink);    
-}
-
-.book_card_rate, label:hover,
-.book_card_rate > label:hover ~ label {
-    color: var(--deep-pink);  
-}
-.book_card_rate > input:checked + label:hover,
-.book_card_rate > input:checked + label:hover ~ label,
-.book_card_rate > input:checked ~ label:hover,
-.book_card_rate > input:checked ~ label:hover ~ label,
-.book_card_rate > label:hover ~ input:checked ~ label {
-    color: var(--deep-pink);
-}  */
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {...} 

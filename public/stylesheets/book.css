@@ -221,5 +221,32 @@
     margin: 3em;
 }
 
+ /* Extra small devices (phones, 600px and down) */
+ @media only screen and (max-width: 600px) {
+    /** View Book Page **/
+    .view_book_container { display: grid; grid-template-columns: 1fr; grid-template-areas: "buttons" "image" "desc" "rating"; }
+    .view_book_buttons { display: flex; margin: auto; align-items: center;}
+    .view_book_description { text-align: center; margin: 1em; } 
+    .view_book_rating { grid-area: rating; margin-top: 1em; text-align: center; }
+}
 
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .view_book_container { display: grid; grid-template-columns: 1fr 1fr; grid-template-areas: " . buttons" "image desc"; }
+    .view_book_container { gap: 1.5em; }
+    .view_book_description { text-align: justify; margin-right: 2em; } 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .view_book_container { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-areas: "buttons image desc ."; }
+    .view_book_container { gap: 1.5em; }
+}
+
+/* Large devices (laptops/desktops, 1014px and up) */
+@media only screen and (min-width: 1014px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {...} 
 
