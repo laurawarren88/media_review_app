@@ -48,7 +48,6 @@ header {
     grid-template-areas: "logo list auth social";
     background-color: var(--blue);
     position: sticky;
-    /* height: auto; */
 }
 
 #logo{
@@ -174,7 +173,6 @@ footer p{
     padding: .5em;
     color: white;
     text-align: right;
-
 }
 
 /** HOME PAGE **/
@@ -213,7 +211,7 @@ footer p{
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {...}
+@media only screen and (min-width: 768px) {}
 
 /* Large devices (laptops/desktops, 1014px and up) */
 @media only screen and (min-width: 1014px) {
@@ -221,4 +219,4 @@ footer p{
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {...} 
+@media only screen and (min-width: 1200px) {} 

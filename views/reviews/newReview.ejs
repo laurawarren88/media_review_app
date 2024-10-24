@@ -3,7 +3,6 @@
 <section class="new_review_container">
     <div class="new_review_area">
         <form action="/reviews/confirm" method="POST" class="new_review_form">
-            <!-- <form action="/reviews" method="POST" class="new_review_form"> -->
                 <% if (book) { %>
                 <input type="hidden" name="bookId" id="bookId" value="<%= book._id %>">
                 <img src="data:<%= book.coverImageType %>;base64,<%= book.coverImage.toString('base64') %>" alt="Book Cover">

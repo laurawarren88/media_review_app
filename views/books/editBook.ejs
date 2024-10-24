@@ -9,9 +9,6 @@
                 <input type="text" name="category" value="<%= book.category %>" placeholder="Category" required>
                 <textarea name="description" placeholder="Breif description of the book" required><%= book.description %></textarea>
             </div>
-            <!-- <div class="new_book_cover">
-                <input type="file" name="cover" class="filepond" required>
-            </div> -->
             
             <div class="edit_book_cover">
                 <% if (book.coverImage) { %>

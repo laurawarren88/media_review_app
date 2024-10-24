@@ -113,7 +113,6 @@ router.put('/:id', ensureAdmin, async (req, res) => {
         book.category = category;
         book.description = description;
 
-        // Save cover if provided
         if (cover && cover !== '') {
             await saveCover(book, cover);
         }
@@ -158,16 +157,14 @@ async function renderNewPage(res, book, hasError = false) {
   };
 
   async function renderFormPage(res, book, form, hasError = false) {
-    // Format cover image for rendering
     const formattedCoverImage = book.coverImage ? 
         `data:${book.coverImageType};base64,${book.coverImage.toString('base64')}` : null;
 
-    // Pass the formatted cover image to the template
     const params = {
         title: "Media Review App",
         book: {
             ...book.toObject(),
-            coverImage: formattedCoverImage // Include the formatted image here
+            coverImage: formattedCoverImage 
         }
     };
     if (hasError) {
@@ -179,26 +176,6 @@ async function renderNewPage(res, book, hasError = false) {
       }
     res.render(`books/${form}`, params)
 };
-
-//Function to link back to the new books page
-// async function renderFormPage(res, book, form, hasError = false) {
-//     try {
-//         const params = {
-//             title: "Media Review App",
-//             book: book
-//         }
-//         if (hasError) {
-//             if (form === 'edit') {
-//               params.errorMessage = 'Error Updating Book'
-//             } else {
-//               params.errorMessage = 'Error Creating Book'
-//             }
-//           }
-//           res.render(`books/${form}`, params)
-//     } catch {
-//         res.redirect(`/books`)
-//     }
-// };
 
 function saveCover(book, coverEncoded) {
     if (coverEncoded == null) return;

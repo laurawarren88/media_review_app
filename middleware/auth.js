@@ -11,7 +11,6 @@ export function ensureAdmin(req, res, next) {
     if (req.session && req.session.user && req.session.user.isAdmin) {
             return next(); 
         } else {
-        // If not logged in, redirect to login page
         req.session.returnTo = req.originalUrl; 
         res.redirect('/user/login');
     }

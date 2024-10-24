@@ -5,10 +5,9 @@ import { ensureAuthenticated } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Displays all the reviews
 router.get('/', async (req, res) => {
     try {
-        const randomReviews = await Review.aggregate([{ $sample: { size: 5 } }]);
+        const randomReviews = await Review.aggregate([{ $sample: { size: 15 } }]);
         const populatedReviews = await Review.populate(randomReviews, { 
             path: 'bookTitle',
             select: 'title author coverImage coverImageType'
@@ -23,7 +22,6 @@ router.get('/', async (req, res) => {
             return {
                 ...review,
                 bookTitle: {
-                    // ...book,
                     ...(book || { title: 'Unknown', author: 'Unknown', coverImage: null }),
                     coverImage: coverImage ? `data:${coverImageType};base64,${coverImage.toString('base64')}` : null
                 }
@@ -72,7 +70,7 @@ router.get('/new', ensureAuthenticated, async (req, res) => {
 router.post('/', ensureAuthenticated, async (req, res) => {
     console.log('Received form data:', req.body); 
 
-    const { bookId, bookTitle, bookAuthor, rating, reviewText } = req.body;
+    const { bookId, rating, reviewText } = req.body;
 
     console.log("Received bookId:", bookId); 
 
@@ -103,7 +101,7 @@ router.post('/', ensureAuthenticated, async (req, res) => {
 });
 
 router.post('/confirm', ensureAuthenticated, (req, res) => {
-    const { bookId, bookTitle, bookAuthor,rating, reviewText } = req.body;  // Add bookId
+    const { bookId, bookTitle, bookAuthor,rating, reviewText } = req.body;    
     res.render('reviews/confirmReview', { bookTitle, bookAuthor, bookId, rating, reviewText });
 });
 
@@ -113,7 +111,7 @@ router.get('/reviews/new/:id', ensureAuthenticated, async (req, res) => {
         if (!book) {
             return res.render('partials/errorMessage', { errorMessage: 'Book not found' });
         }
-        res.render('reviews/new', { book }); // Pass the book object to the template
+        res.render('reviews/new', { book }); 
     } catch (err) {
         console.error(err);
         res.render('partials/errorMessage', { errorMessage: 'Failed to load book' });

@@ -8,7 +8,6 @@ const setupRoutes = (app) => {
     app.use('/user', userRouter);
     app.use('/reviews', reviewsRouter);
 
-    // Home page route
     app.get('/', async (req, res) => {
         let searchOptions = {};
         if (req.query.title != null && req.query.title !== '') {

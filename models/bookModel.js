@@ -1,6 +1,4 @@
 import mongoose from 'mongoose';
-import { type } from 'os';
-import path from 'path';
 
 const bookSchema = new mongoose.Schema({
     title: {
@@ -27,14 +25,6 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-    // This needs to link to the review schema - given by a user
-    // averageRating: {
-    //     // type; mongoose.Schema.types.ObjectId,
-    //     // required: true,
-    //     // ref: 'Review',
-    //     type: Number,
-    //     default: 5
-    // }
 });
 
 bookSchema.virtual('coverImagePath').get(function() {

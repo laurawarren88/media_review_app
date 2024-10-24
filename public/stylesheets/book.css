@@ -235,6 +235,7 @@
     .view_book_container { display: grid; grid-template-columns: 1fr 1fr; grid-template-areas: " . buttons" "image desc"; }
     .view_book_container { gap: 1.5em; }
     .view_book_description { text-align: justify; margin-right: 2em; } 
+}
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
@@ -248,5 +249,4 @@
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {...} 
-
+@media only screen and (min-width: 1200px) {}
