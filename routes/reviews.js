@@ -68,11 +68,11 @@ router.get('/new', ensureAuthenticated, async (req, res) => {
 });
 
 router.post('/', ensureAuthenticated, async (req, res) => {
-    console.log('Received form data:', req.body); 
+    // console.log('Received form data:', req.body); 
 
     const { bookId, rating, reviewText } = req.body;
 
-    console.log("Received bookId:", bookId); 
+    // console.log("Received bookId:", bookId); 
 
     if (!req.session || !req.session.user) {
         return res.render('partials/errorMessage', { errorMessage: 'You must be logged in to leave a review' });
@@ -80,7 +80,7 @@ router.post('/', ensureAuthenticated, async (req, res) => {
     try {
         const book = await Book.findById(bookId);
         if (!book) {
-            console.log("Book not found with ID:", bookId);
+            // console.log("Book not found with ID:", bookId);
             return res.render('partials/errorMessage', { errorMessage: 'Book not found' });
         }
 

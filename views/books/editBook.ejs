@@ -2,7 +2,7 @@
      
 <section class="new_book_container">
     <div class="new_book_area">
-        <form action="/books/<%= book.id %>?_method=PUT" method="post" class="new_book_form">
+        <form action="/books/<%= book._id %>?_method=PUT" method="POST" class="new_book_form">
             <div class="new_book_info">
                 <input type="text" name="title" value="<%= book.title %>" placeholder="Title" required>
                 <input type="text" name="author" value="<%= book.author %>" placeholder="Author" required>

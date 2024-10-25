@@ -99,7 +99,6 @@ router.get('/:id/edit', ensureAdmin, async (req, res) => {
     } catch {
         res.redirect('/')
     }
-    
 });
 
 router.put('/:id', ensureAdmin, async (req, res) => {
