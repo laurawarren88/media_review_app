@@ -1,29 +1,33 @@
 <header>
-    <div class="container">
-        <div id="logo">
-            <img src="/Images/logo.png" class="logo_image" alt="Logo"/>
-        </div>
-            <nav id="primary">
-              <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/books" class="">Books</a></li>
-                <li><a href="/reviews" class="">Reviews</a></li>
-              </ul>  
-            </nav> 
-            <div class="social">
-              <a href="https://www.facebook.com" target="_blank"><span class="facebook"><img src="/Images/facebook.png" alt="facebook-link"/></span></a>
-              <a href="https://www.instagram.com" target="_blank"><span class="instagram"><img src="/Images/instagram.png" alt="instagram-link"/></span></a>
-            </div>    
-      <div class="auth">
-          <% if (isLoggedIn) { %> 
-              <span class="welcome_message">Welcome, <%= currentUser.username %>!</span>
-              <form action="/user/logout" method="POST">
-                <button type="submit" class="">Logout</button>
-            </form>
-          <% } else { %>
-              <button class=""><a href="/user/login" class="">Login</a></button>
-              <button class=""><a href="/user/signup" class="">Register</a></button>
-          <% } %>
-      </div>
-  </div>
+  <nav>
+    <ul class="sidebar">
+      <li onclick=hideSidebar()><a href=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/books" class="">Books</a></li>
+      <li><a href="/reviews" class="">Reviews</a></li>
+<% if (isLoggedIn) { %> 
+      <!-- <span class="welcome_message">Welcome, <%# currentUser.username %>!</span> -->
+      <form action="/user/logout" method="POST">
+        <button type="submit" class="auth">Logout</button>
+      </form>
+<% } else { %>
+      <li class=""><a href="/user/login" class="">Login</a></li>
+<% } %>
+    </ul> 
+
+    <ul>
+      <li><img src="/Images/logo.png" class="logo_image" alt="Logo"></li>
+      <li class="hideOnMobile"><a href="/">Home</a></li>
+      <li class="hideOnMobile"><a href="/books" class="">Books</a></li>
+      <li class="hideOnMobile"><a href="/reviews" class="">Reviews</a></li>
+<% if (isLoggedIn) { %> 
+      <form class="hideOnMobile" action="/user/logout" method="POST">
+        <button type="submit" class="auth">Logout</button>
+      </form>
+<% } else { %>
+      <li class="hideOnMobile"><a href="/user/login" class="">Login</a></li>
+<% } %>
+    <li class="menu_button" onclick=showSidebar()><a href=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
+    </ul> 
+  </nav> 
 </header>
